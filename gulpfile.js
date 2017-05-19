@@ -84,3 +84,11 @@ gulp.task('default', ['html', 'browserify'], function() {
   gulp.watch(viewFiles, ['views']);
   gulp.watch(jsFiles, ['browserify']);
 });
+
+gulp.task('serveprod', function() {
+  connect.server({
+    root: 'https://na39-backoffice.herokuapp.com/',
+    port: process.env.PORT || 5000, // localhost:5000
+    livereload: false
+  });
+});
