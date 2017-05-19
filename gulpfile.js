@@ -81,9 +81,9 @@ gulp.task('default', ['html', 'browserify'], function() {
   //   open: false
   // });
   
-  gulp.watch("src/login-1.html", ['html']);
-  gulp.watch(viewFiles, ['views']);
-  gulp.watch(jsFiles, ['browserify']);
+  // gulp.watch("src/login-1.html", ['html']);
+  // gulp.watch(viewFiles, ['views']);
+  // gulp.watch(jsFiles, ['browserify']);
 });
 
 gulp.task('heroku:production', function() {
