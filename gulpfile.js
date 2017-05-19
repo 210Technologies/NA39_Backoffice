@@ -72,18 +72,18 @@ gulp.task('build', ['html', 'browserify'], function() {
 
 gulp.task('default', ['html', 'browserify'], function() {
 
-  browserSync.init(['./build/**/**.**'], {
-    server: "./build",
-    port: process.env.PORT || 5000,
-    notify: false,
-    ui: {
-      port: 4001
-    }
-  });
+  // browserSync.init(['./build/**/**.**'], {
+  //   server: "./build",
+  //   port: process.env.PORT || 5000,
+  //   notify: false,
+  //   ui: {
+  //     port: 4001
+  //   }
+  // });
   
-  gulp.watch("src/index.html", ['html']);
-  gulp.watch(viewFiles, ['views']);
-  gulp.watch(jsFiles, ['browserify']);
+  // gulp.watch("src/index.html", ['html']);
+  // gulp.watch(viewFiles, ['views']);
+  // gulp.watch(jsFiles, ['browserify']);
 });
 
 gulp.task('heroku:production', function() {
