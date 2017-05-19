@@ -3,8 +3,8 @@ var express = require('express');
 var morgan = require('morgan')
 var app = express();
 
-app.use(morgan('dev'));
-app.use(gzippo.staticGzip("" + __dirname + "/build"));
+// app.use(morgan('dev'));
+// app.use(gzippo.staticGzip("" + __dirname + "/build"));
 app.get('/', function (req, res) {
   res.sendfile('./build/index.html')
 })
