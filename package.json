@@ -4,6 +4,10 @@
   "description": "Angular frontend for Conduit",
   "author": "Thinkster",
   "license": "MIT",
+  "scripts": {
+    "start": "node heroku-app.js",
+    "heroku-postbuild": "gulp"
+  },
   "dependencies": {
     "angular": "^1.5.0-rc.2",
     "angular-file-upload": "^2.5.0",

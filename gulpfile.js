@@ -84,3 +84,7 @@ gulp.task('default', ['html', 'browserify'], function() {
   gulp.watch(viewFiles, ['views']);
   gulp.watch(jsFiles, ['browserify']);
 });
+
+gulp.task('heroku:production', function() {
+  
+});
