@@ -15,15 +15,19 @@
     "browser-sync": "^2.11.1",
     "browserify": "^13.0.0",
     "browserify-ngannotate": "^2.0.0",
+    "express": "^4.15.3",
+    "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^1.8.0",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
+    "gzippo": "^0.2.0",
     "marked": "^0.3.5",
     "merge-stream": "^1.0.0",
     "mixitup": "^3.1.10",
+    "morgan": "^1.8.1",
     "vinyl-source-stream": "^1.1.0"
   }
 }
