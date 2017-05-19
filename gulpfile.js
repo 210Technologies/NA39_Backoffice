@@ -69,22 +69,22 @@ gulp.task('build', ['html', 'browserify'], function() {
   return merge(html,js);
 });
 
-// gulp.task('default', ['html', 'browserify'], function() {
+gulp.task('default', ['html', 'browserify'], function() {
 
-//   browserSync.init(['./build/**/**.**'], {
-//     server: "./build",
-//     port: process.env.PORT || 5000,
-//     notify: false,
-//     ui: {
-//       port: 4001
-//     }, 
-//     open: false
-//   });
+  // browserSync.init(['./build/**/**.**'], {
+  //   server: "./build",
+  //   port: process.env.PORT || 5000,
+  //   notify: false,
+  //   ui: {
+  //     port: 4001
+  //   }, 
+  //   open: false
+  // });
   
-//   gulp.watch("src/login-1.html", ['html']);
-//   gulp.watch(viewFiles, ['views']);
-//   gulp.watch(jsFiles, ['browserify']);
-// });
+  // gulp.watch("src/login-1.html", ['html']);
+  // gulp.watch(viewFiles, ['views']);
+  // gulp.watch(jsFiles, ['browserify']);
+});
 
 gulp.task('heroku:production', function() {
   
