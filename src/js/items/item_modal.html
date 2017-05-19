@@ -1,0 +1,102 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.modalInstance.close($ctrl._video)">&times;</button>
+    <h4 class="modal-title">{{$ctrl._video.title}}</h4>
+</div>
+
+
+<div class="modal-body" ng-show="$ctrl._showEdit == false">
+    <div class="content-box">
+        <div class="content-box-wrapper bg-gray">{{$ctrl._video.description}}</div>
+    </div>
+    <div nb-click="$ctrl.edit">
+        <video style="width: 100%;height: 400px;" controls>
+          <source ng-src="{{$ctrl._video.src.url}}" type="video/mp4">
+          <source ng-src="{{$ctrl._video.src.url}}" type="video/quicktime">
+          Your browser does not support HTML5 video.
+        </video>
+    </div>
+</div>
+
+<div class="content-box" ng-repeat="item in $ctrl._video_uploader.queue">
+        <div class="content-box-wrapper">
+            Name: <span ng-bind="item.file.name"></span>
+            <div class="progressbar" data-value="{{item.progress}}">
+                <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
+                    <div class="progress-label">{{item.progress}}%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-pane">
+            <button ng-click="$ctrl.uploadVideo(item)" class="btn btn-success">
+                <div class=" icon-typicons-export"> </div>
+            </button>
+            <button ng-click="item.cancel()" class="btn btn-warning" title="Stop">
+                <div class=" icon-typicons-block"> </div>
+            </button>
+            <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer">
+                <div class=" icon-typicons-cancel"> </div>
+            </button>
+
+        </div>
+    </div>
+
+<div class="modal-body" ng-show="$ctrl._showEdit == true">
+    <div class="img-modal" ng-hide="$ctrl._video_uploader.queue[0]" >
+      <div class="js input-file-container">
+        <input class="input-file" type="file" uploader="$ctrl._video_uploader" nv-file-select></input>
+        <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
+          Chosir une video...
+        </label>
+      </div>
+    </div>
+    <div class="img-modal" ng-hide="$ctrl._cover_uploader.queue[0]" >
+      <div class="js input-file-container">
+        <input class="input-file" type="file" uploader="$ctrl._cover_uploader" nv-file-select></input>
+        <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
+          Chosir une couverture...
+        </label>
+      </div>
+    </div>
+
+    <div class="content-box" ng-repeat="item in $ctrl._cover_uploader.queue">
+        <div class="content-box-wrapper">
+            Name: <span ng-bind="item.file.name"></span>
+            <div class="progressbar" data-value="{{item.progress}}">
+                <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
+                    <div class="progress-label">{{item.progress}}%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-pane">
+            <button ng-click="$ctrl.uploadCover(item)" class="btn btn-success">
+                <div class=" icon-typicons-export"> </div>
+            </button>
+            <button ng-click="item.cancel()" class="btn btn-warning" title="Stop">
+                <div class=" icon-typicons-block"> </div>
+            </button>
+            <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer">
+                <div class=" icon-typicons-cancel"> </div>
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal-footer" ng-show="$ctrl._showEdit == false">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.edit()">
+        <div class=" icon-linecons-pencil"> </div>
+        <!-- <i class="fa fa-edit"></i>  -->
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.close()">Fermer</button>
+</div>
+
+<div class="modal-footer" ng-show="$ctrl._showEdit == true">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.cancelEdit()">
+        <div class=" icon-typicons-cancel-outline"> </div>
+        <!-- <i class="fa fa-edit"></i>  -->
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.saveVideo()">Enregistrer</button>
+</div>

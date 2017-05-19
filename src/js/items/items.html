@@ -1,0 +1,133 @@
+<div id="page-content-wrapper">
+  <div id="page-content">            
+    <div class="container">
+
+
+      <div id="page-title">
+        <h2>Galerie d'équipement</h2>
+        
+      </div>
+      <div class="panel" ng-show="$ctrl._newCat == false">
+          <div class="panel-body" style="text-align:center;">
+              <!-- <button class="btn btn-primary">Nouvelle vidéo</button> -->
+              <button class="btn btn-blue-alt"  ng-click="$ctrl._newCat = true">Nouvelle catégorie</button>
+             
+          </div>
+      </div>
+       <div class="panel" ng-show="$ctrl._newCat == true">
+        
+              <div class="panel-body">
+              <div class="row">
+                  <div class="col-xs-10">
+                      <h3 class="title-hero">
+                        Nouvelle catégorie
+
+                  </h3>
+                  </div>
+                  <div class="col-xs-2">
+                      <h3 class="title-hero pull-right" style="cursor:pointer;" ng-click="$ctrl._newCat = false">X</h3>
+                  </div>
+              </div>
+                  
+                  <form ng-submit="$ctrl.submitCat()" class="form-horizontal bordered-row">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"></label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="" placeholder="Nom" ng-model="$ctrl._new_item_category.name">
+                        </div>
+                    </div>
+                 </form>
+              </div>
+              <div class="panel-footer" style="text-align:center;">
+                  <button type="button" class="btn btn-primary " type="submit" ng-click="$ctrl.submitCat()">
+                      <i class=" glyph-icon tooltip-button icon-floppy-o"></i>
+                      Enregistrer
+                  </button>
+              </div>
+        
+      </div>
+      
+
+      <link rel="stylesheet" type="text/css" href="../../assets/frontend-elements/portfolio-navigation.css">
+
+      <!-- Mixitup -->
+
+      <script type="text/javascript" src="../assets/widgets/mixitup/mixitup.js"></script>
+      <script type="text/javascript" src="../assets/widgets/mixitup/images-loaded.js"></script>
+      <script type="text/javascript" src="../assets/widgets/mixitup/isotope.js"></script>
+      <script type="text/javascript" src="../assets/widgets/mixitup/portfolio-demo.js"></script>
+      <script type="text/javascript" src="../assets/widgets/dropzone/dropzone.js"></script>
+
+
+
+      <!-- Video Categories -->
+      <div class="portfolio-controls mrg10L mrg10R radius-all-4 portfolio-nav-alt bg-blue clearfix controls">
+          <div class="container text-center">
+              <ul class="float-none">
+                  <li class="filter" data-filter="all" ng-click="$ctrl.selected_cat = undefined">View all</li>
+                  <li ng-repeat= "category in $ctrl._item_categories" class="filter" data-filter="hover_{{category.id}}" ng-click="$ctrl.selected_cat = category">{{category.name}}</li>
+                  <!-- <li class="filter" data-filter="hover_1">Illustrations</li>
+            <li class="filter" data-filter="hover_2">Food &amp; Drink</li>
+            <li class="filter" data-filter="hover_3">Mobile applications</li>
+                    <li class="filter" data-filter="hover_4">Gadgets &amp; Effects</li> -->
+              </ul>
+          </div>
+      </div> 
+
+      <div class="clearfix">
+      <ul mixitup="portfolio-grid" class="reset-ul row" entities='$ctrl._items'>
+        <div class="panel" ng-show="$ctrl.selected_cat !== undefined">
+            <div class="panel-body" style="text-align:center;">
+                <button class="btn btn-primary" ng-click="$ctrl.newItemModal($ctrl.selected_cat)">
+                    <i class="glyph-icon icon-soccer-ball-o"></i>
+                    Nouvel équipement
+                </button>
+                <button class="btn btn-default" ng-click="$ctrl.deleteCat($ctrl.selected_cat)">
+                    <i class="glyph-icon icon-pencil"></i>
+                    Editer Catégorie
+                </button>
+                <button class="btn btn-danger" ng-click="$ctrl.deleteCat($ctrl.selected_cat)">
+                    <i class="glyph-icon icon-trash-o"></i>
+                    Supprimer Catégorie
+                </button>
+            </div>
+        </div>
+        <li ng-repeat="item in $ctrl._items" class="col-lg-3 col-sm-6 col-md-4 mix hover_{{item.item_category_id}}" data-cat="{{item.item_category_id}}">
+            <div class="thumbnail-box-wrapper">
+                <div class="thumbnail-box" ng-click="$ctrl.itemModal(item)"   >
+                    <a href="javascript:void(0)" title="My Account" class="user-profile clearfix"  aria-expanded="false"></a>
+                    <div class="thumb-content">
+                        <div class="center-vertical">
+                            <div class="center-content">
+                                <i class="icon-helper icon-center animated zoomInUp font-white glyph-icon icon-linecons-videocam"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thumb-overlay bg-black"></div>
+                    <img ng-src= "{{item.src.url}}" alt="">
+                </div>
+                <div class="thumb-pane">
+                    <h3 class="thumb-heading animated rollIn">
+                        <a ng-click="$ctrl.itemModal(item)" title="" data-toggle="modal" data-target="#{{item.id}}">
+                            {{item.name}}
+                        </a>
+                        <small>{{item.description}}</small>
+                    </h3>
+                </div>
+            </div>
+
+            
+        </li>
+
+    </ul>
+    </div>
+
+    <div class="divider"></div>
+
+                        </div>
+
+                    
+
+                </div>
+            </div>
+

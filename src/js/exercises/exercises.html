@@ -1,0 +1,48 @@
+<div id="page-content-wrapper">
+  <div id="page-content">            
+    <div class="container">
+
+
+      <div id="page-title">
+        <h2>Exercises</h2>
+        
+      </div>
+
+      <div class="panel" ng-show="$ctrl._newCat == false">
+          <div class="panel-body" style="text-align:center;">
+              <!-- <button class="btn btn-primary">Nouvelle vidéo</button> -->
+              <button class="btn btn-blue-alt"  ng-click="$ctrl.newExerciseModal()">New exercise</button>
+             
+          </div>
+      </div>
+    
+      <div class="row" style="display:flex;flex-direction: row;flex-wrap: wrap;">
+        <div class="col-md-4 col-lg-3" ng-repeat="exercise in $ctrl._exercises">
+          <div class="thumbnail-box-wrapper">
+            <div class="thumbnail-box" ng-click="$ctrl.exerciseModal(exercise)">
+              <a class="thumb-link" href="javascript:void(0)" title=""></a>
+              <div class="thumb-content">
+                <div class="center-vertical">
+                  <div class="center-content">
+                    <i class="icon-helper icon-center animated zoomInUp font-white glyph-icon icon-linecons-camera"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="thumb-overlay bg-black"></div>
+              <img class="lazy" ng-src="{{exercise.cover.url}}" data-original="../../assets/image-resources/stock-images/img-20.jpg" alt="" style="display: block;">
+            </div>
+            <div class="thumb-pane">
+              <h3 class="thumb-heading animated rollIn">
+                  <a ng-click="$ctrl.exerciseModal(exercise)" title="">
+                      {{exercise.title}}
+                  </a>
+                  <small>{{exercise.description}}</small>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

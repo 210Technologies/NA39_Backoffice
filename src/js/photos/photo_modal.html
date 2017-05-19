@@ -1,0 +1,103 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.modalInstance.close($ctrl._video)">&times;</button>
+    <h4 class="modal-title">{{$ctrl._photo.title}}</h4>
+</div>
+
+
+<div class="modal-body" ng-show="$ctrl._showEdit == false">
+    <div class="content-box">
+        <div class="content-box-wrapper bg-gray">{{$ctrl._photo.description}}</div>
+    </div>
+    <div class="row" ng-hide="$ctrl._photo_uploader.queue[0]">
+        <div class="col-md-12">
+            <div class="thumbnail-box">
+                <a class="thumb-link" href="#" title=""></a>
+                <div class="thumb-content">
+                    <div class="center-vertical">
+                        <div class="center-content">
+                            <h3 class="thumb-heading animated bounceIn">
+                                {{$ctrl._photo.description}}
+                                <small>{{$ctrl.getDate($ctrl._photo.created_at)}}</small>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="thumb-overlay bg-primary"></div>
+                <img class="lazy" ng-src="{{$ctrl._photo.src.url}}" data-original="{{$ctrl._photo.src.url}}"  alt="" style="display: block;">
+             </div>
+        </div>
+        <div class="col-md-12">
+            <div class="img-modal"  >
+              <div class="js input-file-container">
+                <input class="input-file" type="file" uploader="$ctrl._photo_uploader" nv-file-select></input>
+                <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
+                  Chosir une photo...
+                </label>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="content-box" ng-repeat="item in $ctrl._photo_uploader.queue">
+                <div class="content-box-wrapper">
+                    Name: <span ng-bind="item.file.name"></span>
+                    <div class="progressbar" data-value="{{item.progress}}">
+                        <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
+                            <div class="progress-label">{{item.progress}}%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-pane">
+                    <button ng-click="$ctrl.uploadPhoto(item)" class="btn btn-success">
+                        <div class=" icon-typicons-export"> </div>
+                    </button>
+                    <button ng-click="item.cancel()" class="btn btn-warning" title="Stop">
+                        <div class=" icon-typicons-block"> </div>
+                    </button>
+                    <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer">
+                        <div class=" icon-typicons-cancel"> </div>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal-body" ng-show="$ctrl._showEdit == true">
+    <form class="form-horizontal bordered-row">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Titre</label>
+            <div class="col-sm-8 ">
+                <input type="text" class="form-control" id="" placeholder="Titre" ng-model="$ctrl._photo.title">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2">Description</label>
+            <div class="col-sm-8">
+                <textarea name="" id="" class="form-control" ng-model="$ctrl._photo.description"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="modal-footer" ng-show="$ctrl._showEdit == false">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.edit()">
+        <div class=" icon-linecons-pencil"> </div>
+        <!-- <i class="fa fa-edit"></i>  -->
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.close()">Fermer</button>
+</div>
+
+<div class="modal-footer" ng-show="$ctrl._showEdit == true">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.cancelEdit()">
+        <div class=" icon-typicons-cancel-outline"> </div>
+        <!-- <i class="fa fa-edit"></i>  -->
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.savePhoto()">Enregistrer</button>
+</div>

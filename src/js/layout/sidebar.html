@@ -1,0 +1,63 @@
+<div id="page-sidebar"  ng-show="$ctrl.navbar == true">
+	<div class="scroll-sidebar">
+    <ul id="sidebar-menu" >
+	    <li class="header"><span>Vue d'ensemble</span></li>
+	    <li ui-sref-active="sfHover">
+	        <a href="#" title="Dashboard" class="sf-without-ul">
+	            <i class="glyph-icon icon-linecons-beaker"></i>
+	            <span>Dashboard</span>
+	        </a>
+	    </li>
+	    <li class="header"><span>Général</span></li>
+	    <li ui-sref-active="sfHover">
+	        <a href="#" title="NewsFeed" class="sf-without-ul">
+	            <i class="glyph-icon icon-linecons-note"></i>
+	            <span>NewsFeed</span>
+	        </a>
+	    </li>
+        <li>
+            <a href="javascript:void(0)" title="Activités" class="sf-with-ul">
+                <i class="glyph-icon icon-linecons-fire"></i>
+                <span>Activités</span>
+                <span class="bs-label label-primary">Hot</span>
+            </a>
+            <div class="sidebar-submenu">
+
+            <ul>
+                <li ui-sref-active="active"><a ui-sref="app.exercises" title="Exercises"><span>Exercices</span></a></li>
+                <li ui-sref-active="active"><a ui-sref="app.workouts" title="Tile boxes"><span>Workout</span></a></li>
+                <li><a href="social-boxes.html" title="Social boxes"><span>Challenges</span></a></li>
+            </ul>
+
+        </div><!-- .sidebar-submenu -->
+    </li>
+    <li ui-sref-active="sfHover">
+        <a ui-sref="app.videos" title="Videos" class="sf-without-ul">
+            <i class="glyph-icon icon-linecons-tv"></i>
+            <span>Vidéos</span>
+        </a>
+    </li>
+    <li ui-sref-active="sfHover">
+        <a ui-sref="app.photos" title="Photos" class="sf-without-ul">
+            <i class="glyph-icon icon-linecons-photo"></i>
+            <span>Photos</span>
+        </a>
+    </li>
+    <li ui-sref-active="sfHover">
+        <a ui-sref="app.items" title="Equipement" class="sf-without-ul">
+            <i class="glyph-icon icon-linecons-t-shirt"></i>
+            <span>Equipements</span>
+        </a>
+    </li>
+
+    <li ui-sref-active="sfHover">
+        <a href="#" title="Equipement" class="sf-without-ul">
+            <i class="glyph-icon icon-linecons-user"></i>
+            <span>Utilisateurs</span>
+        </a>
+
+    </ul><!-- #sidebar-menu -->
+
+
+    </div>
+</div>

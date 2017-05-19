@@ -1,0 +1,181 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.modalInstance.close($ctrl._new_exercise)">&times;</button>
+    <h4 class="modal-title">Nouvel Exercice</h4>
+</div>
+
+<div class="modal-body">
+    <div id="form-wizard-3" class="form-wizard">
+        <ul>
+            <li id="link-1" class="active">
+                <a href="#step-1" data-toggle="tab" aria-expanded="true">
+                    <label class="wizard-step">1</label>
+                  <span class="wizard-description">
+                     Informations
+                     <small></small>
+                  </span>
+                </a>
+            </li>
+            <li id="link-2" class="">
+                <a href="#step-2" data-toggle="tab">
+                    <label class="wizard-step">2</label>
+              <span class="wizard-description">
+                 Exercise
+                 <small>Join the exercise video. </small>
+              </span>
+                </a>
+            </li>
+            <li id="link-3" class="">
+                <a href="#step-3" data-toggle="tab">
+                    <label class="wizard-step">3</label>
+              <span class="wizard-description">
+                Cover
+                 <small>Join the exercise cover.</small>
+              </span>
+                </a>
+            </li>
+            <li id="link-4">
+                <a href="#step-4" data-toggle="tab">
+                    <label class="wizard-step">4</label>
+              <span class="wizard-description">
+                 Status
+                 <small>Statuts de publication</small>
+              </span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="step-1">
+                <form class="form-horizontal bordered-row">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Title</label>
+                        <div class="col-sm-8 ">
+                            <input type="text" class="form-control" id="" placeholder="Title" ng-model="$ctrl._new_exercise.title">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Sous-Titre</label>
+                        <div class="col-sm-8 ">
+                            <input type="text" class="form-control" id="" placeholder="Titre" ng-model="$ctrl._new_exercise.sub_title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-8">
+                            <textarea name="" id="" class="form-control" ng-model="$ctrl._new_exercise.description"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-pane" id="step-2">
+                <form class="form-horizontal bordered-row">
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <div class="img-modal" ng-hide="$ctrl._src_uploader.queue[0]" >
+                              <div class="js input-file-container">
+                                <input class="input-file" type="file" uploader="$ctrl._src_uploader" nv-file-select></input>
+                                <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
+                                  Chosir une video...
+                                </label>
+                              </div>
+                            </div>
+                            <div class="content-box" ng-repeat="item in $ctrl._src_uploader.queue">
+                                <div class="content-box-wrapper">
+                                    Name: <span ng-bind="item.file.name"></span>
+                                    <div class="progressbar" data-value="{{item.progress}}">
+                                        <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
+                                            <div class="progress-label">{{item.progress}}%</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="button-pane">
+                                    <button ng-click="$ctrl.uploadVideo(item)" class="btn btn-success">
+                                        <div class=" icon-typicons-export"> </div>
+                                    </button>
+                                    <button ng-click="item.cancel()" class="btn btn-warning" title="Stop">
+                                        <div class=" icon-typicons-block"> </div>
+                                    </button>
+                                    <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer">
+                                        <div class=" icon-typicons-cancel"> </div>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-pane " id="step-3">
+                 <form class="form-horizontal bordered-row">
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <div class="img-modal" ng-hide="$ctrl._cover_uploader.queue[0]" >
+                              <div class="js input-file-container">
+                                <input class="input-file" type="file" uploader="$ctrl._cover_uploader" nv-file-select></input>
+                                <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
+                                  Chosir une couverture...
+                                </label>
+                              </div>
+                            </div>
+                            <div class="content-box" ng-repeat="item in $ctrl._cover_uploader.queue">
+                                <div class="content-box-wrapper">
+                                    Name: <span ng-bind="item.file.name"></span>
+                                    <div class="progressbar" data-value="{{item.progress}}">
+                                        <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
+                                            <div class="progress-label">{{item.progress}}%</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="button-pane">
+                                    <button ng-click="$ctrl.uploadCover(item)" class="btn btn-success">
+                                        <div class=" icon-typicons-export"> </div>
+                                    </button>
+                                    <button ng-click="item.cancel()" class="btn btn-warning" title="Stop">
+                                        <div class=" icon-typicons-block"> </div>
+                                    </button>
+                                    <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer">
+                                        <div class=" icon-typicons-cancel"> </div>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </form>
+            </div>
+                    <div class="tab-pane" id="step-4">
+                        <div class="content-box">
+                            <h3 class="content-box-header bg-blue">
+                                Forth
+                            </h3>
+                            <div class="content-box-wrapper">
+                                Lorem ipsum dolor sic amet dixit tu.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    
+         
+        
+        
+        
+    
+
+
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.cancelEdit()">
+        <div class=" icon-typicons-cancel-outline"> </div>
+        <!-- <i class="fa fa-edit"></i>  -->
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.firstStep()">
+        Suivant
+        <i class="glyph-icon icon-arrow-right"></i>
+    </button>
+</div>
