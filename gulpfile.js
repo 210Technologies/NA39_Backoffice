@@ -13,6 +13,7 @@ var merge         = require('merge-stream');
 // Where our files are located
 var jsFiles   = "src/js/**/*.js";
 var viewFiles = "src/js/**/*.html";
+var cssFiles = "src/assets/**/"
 
 var interceptErrors = function(error) {
   var args = Array.prototype.slice.call(arguments);
@@ -41,7 +42,7 @@ gulp.task('browserify', ['views'], function() {
 });
 
 gulp.task('html', function() {
-  return gulp.src("src/login-1.html")
+  return gulp.src("src/index.html")
       .on('error', interceptErrors)
       .pipe(gulp.dest('./build/'));
 });
@@ -59,7 +60,7 @@ gulp.task('views', function() {
 // This task is used for building production ready
 // minified JS/CSS files into the dist/ folder
 gulp.task('build', ['html', 'browserify'], function() {
-  var html = gulp.src("build/login-1.html")
+  var html = gulp.src("build/index.html")
                  .pipe(gulp.dest('./dist/'));
 
   var js = gulp.src("build/main.js")
@@ -71,19 +72,18 @@ gulp.task('build', ['html', 'browserify'], function() {
 
 gulp.task('default', ['html', 'browserify'], function() {
 
-  // browserSync.init(['./build/**/**.**'], {
-  //   server: "./build",
-  //   port: process.env.PORT || 5000,
-  //   notify: false,
-  //   ui: {
-  //     port: 4001
-  //   }, 
-  //   open: false
-  // });
+  browserSync.init(['./build/**/**.**'], {
+    server: "./build",
+    port: process.env.PORT || 5000,
+    notify: false,
+    ui: {
+      port: 4001
+    }
+  });
   
-  // gulp.watch("src/login-1.html", ['html']);
-  // gulp.watch(viewFiles, ['views']);
-  // gulp.watch(jsFiles, ['browserify']);
+  gulp.watch("src/index.html", ['html']);
+  gulp.watch(viewFiles, ['views']);
+  gulp.watch(jsFiles, ['browserify']);
 });
 
 gulp.task('heroku:production', function() {
