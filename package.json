@@ -23,6 +23,7 @@
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^1.8.0",
+    "gulp-clean-css": "^3.4.0",
     "gulp-concat": "^2.6.1",
     "gulp-concat-css": "^2.3.0",
     "gulp-font": "^1.0.4",
