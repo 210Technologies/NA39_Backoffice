@@ -9,11 +9,20 @@ var rename        = require('gulp-rename');
 var templateCache = require('gulp-angular-templatecache');
 var uglify        = require('gulp-uglify');
 var merge         = require('merge-stream');
+var cleanCSS      = require('gulp-clean-css');
+var sourcemaps    = require('gulp-sourcemaps');
+var image         = require('gulp-image');
+var concatCss     = require('gulp-concat-css');
+var concat        = require('gulp-concat');
+ 
+
+
+// var fonts         = require('gulp-font')
+
 
 // Where our files are located
 var jsFiles   = "src/js/**/*.js";
 var viewFiles = "src/js/**/*.html";
-var cssFiles = "src/assets/**/"
 
 var interceptErrors = function(error) {
   var args = Array.prototype.slice.call(arguments);
@@ -28,6 +37,28 @@ var interceptErrors = function(error) {
   this.emit('end');
 };
 
+gulp.task('fonts', function() {
+    return gulp.src(['./src/assets/fonts/*'])
+            .pipe(gulp.dest('./build/styles'));
+});
+
+gulp.task('scripts', function() {
+  return gulp.src('./src/assets/js/*.js')
+             .pipe(uglify())
+             .pipe(gulp.dest('./build/js/'));
+});
+
+
+gulp.task('image', function () {
+  gulp.src('./src/assets/images/*')
+    .pipe(gulp.dest('./build/styles'));
+});
+
+gulp.task('minify-css', function () {
+  return gulp.src('./src/assets/css/*.css')
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(gulp.dest('./build/styles'));
+});
 
 gulp.task('browserify', ['views'], function() {
   return browserify('./src/js/app.js')
@@ -59,7 +90,7 @@ gulp.task('views', function() {
 
 // This task is used for building production ready
 // minified JS/CSS files into the dist/ folder
-gulp.task('build', ['html', 'browserify'], function() {
+gulp.task('build', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fonts'], function() {
   var html = gulp.src("build/index.html")
                  .pipe(gulp.dest('./dist/'));
 
@@ -70,7 +101,7 @@ gulp.task('build', ['html', 'browserify'], function() {
   return merge(html,js);
 });
 
-gulp.task('default', ['html', 'browserify'], function() {
+gulp.task('default', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fonts'], function() {
 
   // browserSync.init(['./build/**/**.**'], {
   //   server: "./build",
