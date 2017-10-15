@@ -9,6 +9,7 @@ class NewVideoModalCtrl {
     this._AppConstants = AppConstants;
     this._showEdit = false
     this._new_video = {}
+    this.step = 1
     
   }
 
@@ -21,8 +22,35 @@ class NewVideoModalCtrl {
 		  	$('#step-2').show()
 		  	$('li').removeClass('active')
 		  	$('li#link-2').addClass('active')
+        this.step = 2
   		}
   	)
+  }
+
+  secondStep(){
+    if (!this.src_set){return}
+    $('.tab-pane').hide()
+    $('#step-3').show()
+    $('li').removeClass('active')
+    $('li#link-3').addClass('active')
+    this.step = 3
+  }
+
+  thirdStep(){
+    if (!this.cover_set){return}
+    $('.tab-pane').hide()
+    $('#step-4').show()
+    $('li').removeClass('active')
+    $('li#link-4').addClass('active')
+    this.step = 4
+  }
+
+  fourthStep(){
+    this._Video.update(this._new_video).then(
+      (res) => {
+        this.modalInstance.close(res)
+      }
+    )
   }
 
   uploadVideo(item) {
@@ -36,10 +64,7 @@ class NewVideoModalCtrl {
     }
     item.onComplete = function(response, video){
       ctrl._new_video = response;
-      $('.tab-pane').hide()
-		  $('#step-3').show()
-		  $('li').removeClass('active')
-		  $('li#link-3').addClass('active')
+      ctrl.src_set = true
     }
 	  item.upload()
   }
@@ -54,10 +79,7 @@ class NewVideoModalCtrl {
     }
     item.onComplete = function(response){
       ctrl._new_video = response;
-      $('.tab-pane').hide()
-		  $('#step-4').show()
-		  $('li').removeClass('active')
-		  $('li#link-4').addClass('active')
+      ctrl.cover_set = true
     }
     item.upload()
   }

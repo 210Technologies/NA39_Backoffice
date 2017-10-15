@@ -19,6 +19,7 @@ class NewItemModalCtrl {
     item.formData.push({'item[item_category_id]': this._category.id})
     item.formData.push({'item[description]': this._new_item.description})
     item.formData.push({'item[link]': this._new_item.link})
+    item.formData.push({'item[status]': this._new_item.status})
     item.alias = 'item[src]'
     item.method = 'POST'
     
@@ -26,8 +27,7 @@ class NewItemModalCtrl {
       item.progress = progress
     }
     item.onComplete = function(response, video){
-      ctrl._new_item = response;
-      this._showEdit = false
+      ctrl.modalInstance.close(response)
     }
     item.upload()
     

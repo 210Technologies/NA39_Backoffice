@@ -22,11 +22,26 @@ export default class Exercise {
     }).then((res) => res.data);
   }
 
-  newExercise(exercise){
+  save(exercise){
     return this._$http({ 
       url: this._AppConstants.api + '/admin/exercises/',
       method: 'POST',
       data: exercise
+    }).then((res) => res.data);
+  }
+
+  update(exercise){
+    return this._$http({ 
+      url: this._AppConstants.api + '/admin/exercises/' + exercise.id,
+      method: 'PUT',
+      data: exercise
+    }).then((res) => res.data);
+  }
+
+  delete(exercise){
+    return this._$http({ 
+      url: this._AppConstants.api + '/admin/exercises/' + exercise.id,
+      method: 'DELETE'
     }).then((res) => res.data);
   }
   // Retrieve a user's profile

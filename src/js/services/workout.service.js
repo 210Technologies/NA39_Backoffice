@@ -13,10 +13,15 @@ export default class Workout {
       method: 'GET'
     }).then((res) => res.data);
   }
-
+  getWorkout(id){
+    return this._$http({
+      url: this._AppConstants.api + '/admin/workouts/' + id,
+      method: 'GET'
+    }).then((res) => res.data);
+  }
   update(workout){
     return this._$http({
-      url: this._AppConstants.api + '/admin/workout/' + workout.id+ '/update_workout',
+      url: this._AppConstants.api + '/admin/workouts/' + workout.id+ '/update_workout',
       method: 'POST',
       data: workout
     }).then((res) => res.data);

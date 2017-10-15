@@ -1,0 +1,43 @@
+<div id="page-content-wrapper">
+  <div id="page-content">            
+    <div class="container">
+
+
+      <div id="page-title">
+        <h2>{{$ctrl._challenge.name}}</h2>
+        <p>{{$ctrl._challenge.description}}</p>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-body">
+              <table class="table table-hover">
+                <thead></thead>
+                    <tbody>
+                        <tr ng-repeat="question in $ctrl._challenge.questions" style="cursor: pointer;" ng-click="$ctrl.QuestionModal(question)">
+                            <td>{{$index + 1}}</td>
+                            <td>{{question.content}}</td>
+                        </tr>
+                    </tbody>
+                </table>  
+            </div>
+            <div class="panel-footer" style='text-align:center;'>
+                <a class="btn btn-primary btn-sm" ng-click="$ctrl.newQuestionModal()">
+                    Ajouter une question
+                </a>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-body">
+              <a class="btn btn-default btn-sm" ng-click="$ctrl.challengeModal()">
+                Éditer
+              </a>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+

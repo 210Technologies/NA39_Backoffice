@@ -1,0 +1,61 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.modalInstance.close('cancel')">&times;</button>
+    <h4 class="modal-title">{{$ctrl._challenge.name}}</h4>
+</div>
+
+
+
+<div class="modal-body">
+    <div class="row" ng-show="$ctrl._load == true">
+        <div class="remove-border glyph-icon demo-icon tooltip-button icon-spin-6 icon-spin" style= "margin: 10px auto;color:#39d2b4"></div>
+    </div>
+    
+    <form class="form-horizontal bordered-row" ng-show="$ctrl._load != true">
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="img-modal" ng-hide="$ctrl._cover_uploader.queue[0]" >
+                    <div class="js input-file-container">
+                        <input class="input-file" type="file" uploader="$ctrl._cover_uploader" nv-file-select></input>
+                        <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
+                          Choose cover...
+                        </label>
+                      </div>
+                </div>
+                <div class="content-box" ng-repeat="item in $ctrl._cover_uploader.queue">
+                    <div class="content-box-wrapper">
+                        Name: <span ng-bind="item.file.name"></span>
+                        <div class="progressbar" data-value="{{item.progress}}">
+                            <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
+                                <div class="progress-label">{{item.progress}}%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Titre</label>
+            <div class="col-sm-8 ">
+                <input type="text" class="form-control" id="" placeholder="Titre" ng-model="$ctrl._challenge.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2">Description</label>
+            <div class="col-sm-8">
+                <textarea name="" id="" class="form-control" ng-model="$ctrl._challenge.description"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+    
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.modalInstance.close('cancel')">
+        <div class=" icon-typicons-cancel-outline"> </div>
+        <!-- <i class="fa fa-edit"></i>  -->
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.saveChallenge()">
+        <i class="glyph-icon icon-floppy-o"></i>
+        Enregistrer
+    </button>
+</div>
+

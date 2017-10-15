@@ -34,4 +34,13 @@ servicesModule.service('Exercise', ExerciseService);
 import WorkoutService from './workout.service';
 servicesModule.service('Workout', WorkoutService);
 
+import StepService from './step.service';
+servicesModule.service('Step', StepService);
+
+import ChallengeService from './challenge.service';
+servicesModule.service('Challenge', ChallengeService);
+
+import QuestionService from './question.service';
+servicesModule.service('Question', QuestionService);
+
 export default servicesModule;

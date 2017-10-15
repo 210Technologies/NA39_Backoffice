@@ -12,6 +12,7 @@ import 'angular-ui-bootstrap';
 import './config/app.templates';
 // Import our app functionaity
 import './layout';
+import './challenges';
 import './components';
 import './home';
 import './profile';
@@ -23,6 +24,7 @@ import './photos';
 import './items';
 import './exercises';
 import './workouts';
+import './steps';
 
 // Create and bootstrap application
 const requires = [
@@ -33,6 +35,7 @@ const requires = [
   'angularFileUpload',
   'app.layout',
   'app.components',
+  'app.challenges',
   'app.home',
   'app.profile',
   'app.article',
@@ -42,7 +45,8 @@ const requires = [
   'app.photos',
   'app.items',
   'app.exercises',
-  'app.workouts'
+  'app.workouts',
+  'app.steps'
 ];
 
 // Mount on window for testing

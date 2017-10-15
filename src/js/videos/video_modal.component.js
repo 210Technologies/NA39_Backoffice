@@ -25,7 +25,7 @@ class VideoModalCtrl {
       item.progress = progress
     }
     item.onComplete = function(response){
-      ctrl._video = response;
+      ctrl._video.src = response.src;
     }
     item.upload()
   }
@@ -39,11 +39,27 @@ class VideoModalCtrl {
       item.progress = progress
     }
     item.onComplete = function(response){
-      ctrl._video = response;
+      ctrl._video.cover = response.cover;
     }
     item.upload()
   }
 
+  saveVideo(){
+    this._Video.update(this._video).then(
+      (res) => {
+        this._video = res
+        this._showEdit = false
+      }
+    )
+  }
+
+  deleteVideo(){
+    this._Video.delete(this._video).then(
+      (res) => {
+        this.modalInstance.close('delete')
+      }
+    )
+  }
 }
 
 let AppHeader = {

@@ -26,6 +26,7 @@ class NewPhotoModalCtrl {
     }
     item.onComplete = function(response, video){
       ctrl._new_photo = response;
+      ctrl.modalInstance.close(response)
     }
     item.upload()
   	

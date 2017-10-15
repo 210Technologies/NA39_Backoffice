@@ -76,11 +76,18 @@
                               <div class="js input-file-container">
                                 <input class="input-file" type="file" uploader="$ctrl._src_uploader" nv-file-select></input>
                                 <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
-                                  Chosir une video...
+                                  Choose video...
                                 </label>
                               </div>
                             </div>
-                            <div class="content-box" ng-repeat="item in $ctrl._src_uploader.queue">
+                            <div ng-show="$ctrl.src_set">
+                                <video style="width: 100%;height: 400px;" controls>
+                                  <source ng-src="{{$ctrl._new_exercise.src.url}}" type="video/mp4">
+                                  <source ng-src="{{$ctrl._new_exercise.src.url}}" type="video/quicktime">
+                                  Your browser does not support HTML5 video.
+                                </video>
+                            </div>
+                            <div class="content-box" ng-repeat="item in $ctrl._src_uploader.queue" ng-show="!$ctrl.src_set">
                                 <div class="content-box-wrapper">
                                     Name: <span ng-bind="item.file.name"></span>
                                     <div class="progressbar" data-value="{{item.progress}}">
@@ -93,12 +100,15 @@
                                 <div class="button-pane">
                                     <button ng-click="$ctrl.uploadVideo(item)" class="btn btn-success">
                                         <div class=" icon-typicons-export"> </div>
+                                        Upload
                                     </button>
                                     <button ng-click="item.cancel()" class="btn btn-warning" title="Stop">
                                         <div class=" icon-typicons-block"> </div>
+                                        Stop
                                     </button>
                                     <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer">
                                         <div class=" icon-typicons-cancel"> </div>
+                                        Cancel
                                     </button>
 
                                 </div>
@@ -117,11 +127,29 @@
                               <div class="js input-file-container">
                                 <input class="input-file" type="file" uploader="$ctrl._cover_uploader" nv-file-select></input>
                                 <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
-                                  Chosir une couverture...
+                                  Choose cover...
                                 </label>
                               </div>
                             </div>
-                            <div class="content-box" ng-repeat="item in $ctrl._cover_uploader.queue">
+                            <div class="row" ng-show="$ctrl.cover_set">
+                                <div class="col-md-12">
+                                    <div class="thumbnail-box">
+                                        <a class="thumb-link" href="#" title=""></a>
+                                        <div class="thumb-content">
+                                            <div class="center-vertical">
+                                                <div class="center-content">
+                                                    <h3 class="thumb-heading animated bounceIn">
+                                                        <small>{{$ctrl.getDate($ctrl._new_exercise.created_at)}}</small>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="thumb-overlay bg-primary"></div>
+                                        <img class="lazy" ng-src="{{$ctrl._new_exercise.cover.url}}" data-original="{{$ctrl._new_exercise.cover.url}}"  alt="" style="display: block;">
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="content-box" ng-repeat="item in $ctrl._cover_uploader.queue" ng-show="!$ctrl.cover_set">
                                 <div class="content-box-wrapper">
                                     Name: <span ng-bind="item.file.name"></span>
                                     <div class="progressbar" data-value="{{item.progress}}">
@@ -149,15 +177,21 @@
             </form>
             </div>
                     <div class="tab-pane" id="step-4">
-                        <div class="content-box">
-                            <h3 class="content-box-header bg-blue">
-                                Forth
-                            </h3>
-                            <div class="content-box-wrapper">
-                                Lorem ipsum dolor sic amet dixit tu.
-                            </div>
+                        <form class="form-horizontal bordered-row">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Status</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline">
+                                <input type="radio" id=""  value="online" ng-model="$ctrl._new_exercise.status">
+                                Online
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id=""  value="offline" ng-model="$ctrl._new_exercise.status">
+                                Offline
+                            </label>
                         </div>
                     </div>
+                    </form>
                 </div>
     </div>
     
@@ -170,12 +204,20 @@
 
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.cancelEdit()">
-        <div class=" icon-typicons-cancel-outline"> </div>
-        <!-- <i class="fa fa-edit"></i>  -->
-    </button>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.firstStep()">
-        Suivant
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.firstStep()" ng-show="$ctrl.step == 1">
+        Next
         <i class="glyph-icon icon-arrow-right"></i>
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.secondStep()" ng-show="$ctrl.step == 2">
+        Next
+        <i class="glyph-icon icon-arrow-right"></i>
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.thirdStep()" ng-show="$ctrl.step == 3">
+        Next
+        <i class="glyph-icon icon-arrow-right"></i>
+    </button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.fourthStep()" ng-show="$ctrl.step == 4">
+        Save
+        <i class="glyph-icon icon-save"></i>
     </button>
 </div>

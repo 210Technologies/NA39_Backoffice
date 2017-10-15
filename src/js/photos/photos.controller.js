@@ -1,5 +1,5 @@
 class PhotosCtrl {
-  constructor(category_photos, photos, $state, Photo, $uibModal, CategoryPhoto) {
+  constructor(category_photos, photos, $state, Photo, $uibModal, CategoryPhoto, $filter) {
     'ngInject';
     this._$state = $state;
     this._photos = photos
@@ -9,26 +9,8 @@ class PhotosCtrl {
     this._$uibModal = $uibModal
     this._newCat = false;
     this._new_category_photo = {}
-    this._selected_cat = undefined
-    this._selected_cat_ids = []
+    this.$_filter = $filter
   }
-  
-  photosCategory(category){
-    this._selected_cat = category
-    // if (this._selected_cat_ids.indexOf(category.id) == -1){
-    //   console.log(this._photos)
-    //   this._CategoryPhoto.getPhotos(category.id).then(
-    //     (res) => {
-    //       $.merge(this._photos, res.photos)
-    //       this._selected_cat_ids.push(category.id)
-    //     },
-    //     (err) => {}
-    //   )
-
-    // }
-    
-  }
-
   photoModal(photo){
     let ctrl = this
       var modalInstance = this._$uibModal.open({
@@ -46,13 +28,49 @@ class PhotosCtrl {
   }
 
   submitCat(){
-    this._Photo.newCat(this._new_category_photo).then(
+    this._CategoryPhoto.save(this._new_category_photo).then(
       (res) => {
         this._category_photos.push(res)
         this._newCat = false;
       },
       (err) => {err.data}
     )
+  }
+
+  updateCat(){
+    this._CategoryPhoto.update(this._selected_cat).then(
+      (res) => {
+        this._selected_cat.edit = false;
+      },
+      (err) => {err.data}
+    )
+  }
+
+  deleteCat(category){
+    let ctrl = this
+    var modalInstance = this._$uibModal.open({
+        component: 'appDeleteModal',
+        resolve:{
+            item: function(){
+              return category
+            },
+            service: function(){
+              return ctrl._CategoryPhoto
+            },
+            message: function(){
+              return 'Delete this category will delete all his photos, are you sure?'
+            }
+        }
+   }).result.then(function (result) {
+      if (result == 'ok'){
+        ctrl._category_photos.splice(ctrl._category_photos.indexOf(category), 1)
+        var videos = ctrl.$_filter('filter')(ctrl._photos, {category_photo_id: ctrl._selected_cat.id})
+        for (var i = videos.length -1; i >= 0; i--)
+          ctrl._photos.splice(ctrl._photos.indexOf(videos[i]),1);
+        ctrl._selected_cat = ctrl._category_photos[ctrl._category_photos.length - 1]
+      }
+      
+    });
   }
 
   newPhotoModal(category){

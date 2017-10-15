@@ -12,7 +12,6 @@ class ExercisesCtrl {
 
   exerciseModal(exercise){
     let ctrl = this
-    console.log(this)
       var modalInstance = this._$uibModal.open({
                 
                 component: 'appExerciseModal',
@@ -24,7 +23,11 @@ class ExercisesCtrl {
                 
            })
     modalInstance.result.then(function (result) {
-      ctrl._exercises[ctrl._exercises.indexOf(exercise)] = result
+      if (result != 'delete'){
+        ctrl._exercises[ctrl._exercises.indexOf(exercise)] = result
+      }else{
+        ctrl._exercises.splice(ctrl._exercises.indexOf(exercise), 1)
+      }
     });
   }
 

@@ -10,30 +10,13 @@ class WorkoutsCtrl {
     // this.logout = User.logout.bind(User); 
   }
 
-  workoutModal(workout){
-    let ctrl = this
-    console.log(this)
-      var modalInstance = this._$uibModal.open({
-                
-                component: 'appWorkoutModal',
-                resolve:{
-                    workout: function() {
-                      return workout;
-                    }
-                }
-                
-           })
-    modalInstance.result.then(function (result) {
-      ctrl._workouts[ctrl._workouts.indexOf(workout)] = result
-    });
-  }
-
   newWorkoutModal(){
-    let ctrl = this._exercises
+    let ctrl = this._workouts
     var modalInstance = this._$uibModal.open({
         component: 'appNewWorkoutModal'
    }).result.then(function (result) {
-      ctrl.push(result)
+      if (result != 'cancel')
+        ctrl.push(result)
     });
   }
 

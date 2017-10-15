@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.modalInstance.close('cancel')">&times;</button>
+    <h4 class="modal-title">Nouvelle question</h4>
+</div>
+
+
+
+<div class="modal-body">
+    <!-- <div class="row" ng-show="$ctrl._load == true">
+        <div class="remove-border glyph-icon demo-icon tooltip-button icon-spin-6 icon-spin" style= "margin: 10px auto;color:#39d2b4"></div>
+    </div> -->
+    
+    <form class="form-horizontal bordered-row" ng-hide="$ctrl._new_question.id">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Question</label>
+            <div class="col-sm-10 ">
+                <textarea name="" id="" class="form-control" ng-model="$ctrl._new_question.content"></textarea>
+                <div style='margin-top:10px;float: right;'>
+                    <button type="button" class="btn btn-primary" ng-click="$ctrl.saveQuestion()">
+                        <i class="glyph-icon icon-floppy-o"></i>
+                        Enregistrer
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+    <div ng-show="$ctrl._new_question.id">
+        <strong>{{$ctrl._new_question.content}}</strong>
+    </div>
+</div>
+

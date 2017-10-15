@@ -19,6 +19,24 @@ function WorkoutsConfig($stateProvider) {
         );
       }
     }
+  })
+  .state('app.workout', {
+    url: '/workout/:id',
+    controller: 'WorkoutCtrl',
+    controllerAs: '$ctrl',
+    templateUrl: 'workouts/workout.html',
+    title: 'Workout',
+    resolve: {
+      auth: function(User) {
+        return User.ensureAuthIs(true);
+      },
+      workout: function(Workout, $state, $stateParams) {
+        return Workout.getWorkout($stateParams.id).then(
+          (profile) => profile,
+          (err) => $state.go('app.home')
+        );
+      }
+    }
   });
 
 };

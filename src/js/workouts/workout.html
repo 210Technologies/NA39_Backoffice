@@ -1,0 +1,51 @@
+<div id="page-content-wrapper">
+  <div id="page-content">            
+    <div class="container">
+
+
+      <div id="page-title">
+        <h2>{{$ctrl._workout.title}}</h2>
+        <p>{{$ctrl._workout.description}}</p>
+        
+      </div>
+      <div class="panel" >
+            <div class="panel-body" style="text-align:center;">
+                <button class="btn btn-primary" ng-click="$ctrl.newVideoModal($ctrl.selected_cat)">
+                    <i class="glyph-icon icon-video-camera"></i>
+                    Nouvelle vidéo
+                </button>
+                <button class="btn btn-default" ng-click="$ctrl.selected_cat.edit = true">
+                    <i class="glyph-icon icon-pencil"></i>
+                    Editer Catégorie
+                </button>
+                <button class="btn btn-danger" ng-click="$ctrl.deleteCat($ctrl.selected_cat)">
+                    <i class="glyph-icon icon-trash-o"></i>
+                    Supprimer Catégorie
+                </button>
+            </div>
+        </div>
+      <div class="row">
+        <div class="col-md-9">
+        <div class="blog-box row" ng-repeat="step in $ctrl._workout.steps">
+            <div class="post-image col-md-4">
+                <a href="" class="prettyphoto" rel="prettyPhoto[pp_gal]" title="Blog post title">
+                    <img class="img-responsive lazy img-rounded" ng-src="{{step.cover.url}}" data-original="../../assets/image-resources/stock-images/img-44.jpg" alt="" style="display: block;">
+                </a>
+            </div>
+            <div class="post-content-wrapper col-md-8">
+                <a class="post-title" href="#" title="">
+                    <h3>{{step.title}}</h3>
+                </a>
+                <div class="post-content">
+                    <p>{{step.description}}</p>
+                </div>
+                <a ng-click="$ctrl.stepModal(step)" class="btn btn-sm btn-default" title="Read more">Edit</a>
+            </div>
+        </div>
+  
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+

@@ -29,6 +29,30 @@ export default class ItemCategory {
       } 
     }).then((res) => res.data);
   }
+
+  save(cat){
+    return this._$http({
+      url:  this._AppConstants.api + '/admin/item_categories',
+      method: 'POST',
+      data: cat
+    }).then((res) => res.data)
+  }
+
+  update(cat){
+    return this._$http({
+      url:  this._AppConstants.api + '/admin/item_categories/' + cat.id,
+      method: 'PUT',
+      data: cat
+    }).then((res) => res.data)
+  }
+
+  delete(cat){
+    return this._$http({
+      url:  this._AppConstants.api + '/admin/item_categories/' + cat.id,
+      method: 'DELETE',
+      data: cat
+    }).then((res) => res.data)
+  }
   // Retrieve a user's profile
   // get() {
   //   return this._$http({ 

@@ -1,0 +1,48 @@
+<div id="page-content-wrapper">
+  <div id="page-content">            
+    <div class="container">
+
+
+      <div id="page-title">
+        <h2>Challenges</h2>
+        
+      </div>
+
+      <div class="panel" ng-show="$ctrl._newCat == false">
+          <div class="panel-body" style="text-align:center;">
+              <!-- <button class="btn btn-primary">Nouvelle vidéo</button> -->
+              <button class="btn btn-blue-alt"  ng-click="$ctrl.newChallengeModal()">New challenge</button>
+             
+          </div>
+      </div>
+    
+      <div class="row" style="display:flex;flex-direction: row;flex-wrap: wrap;">
+        <div class="col-md-4 col-lg-3" ng-repeat="challenge in $ctrl._challenges">
+          <div class="thumbnail-box-wrapper">
+            <div class="thumbnail-box" >
+              <a class="thumb-link" ui-sref="app.challenge({id: challenge.id})" title="" ></a>
+              <div class="thumb-content">
+                <div class="center-vertical">
+                  <div class="center-content">
+                    <i class="icon-helper icon-center animated zoomInUp font-white glyph-icon icon-linecons-camera"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="thumb-overlay bg-black"></div>
+              <img class="lazy" ng-src="{{challenge.cover.url}}" data-original="{{challenge.cover.url}}" alt="" style="display: block;">
+            </div>
+            <div class="thumb-pane">
+              <h3 class="thumb-heading animated rollIn">
+                  <a ui-sref="app.challenge({id: challenge.id})" title="">
+                      {{challenge.name}}
+                  </a>
+                  <small>{{challenge.description}}</small>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

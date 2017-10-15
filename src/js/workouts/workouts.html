@@ -19,8 +19,8 @@
       <div class="row" style="display:flex;flex-direction: row;flex-wrap: wrap;">
         <div class="col-md-4 col-lg-3" ng-repeat="workout in $ctrl._workouts">
           <div class="thumbnail-box-wrapper">
-            <div class="thumbnail-box" ng-click="$ctrl.workoutModal(workout)">
-              <a class="thumb-link" href="javascript:void(0)" title=""></a>
+            <div class="thumbnail-box" >
+              <a class="thumb-link" ui-sref="app.workout({id: workout.id})" title="" ></a>
               <div class="thumb-content">
                 <div class="center-vertical">
                   <div class="center-content">
@@ -33,7 +33,7 @@
             </div>
             <div class="thumb-pane">
               <h3 class="thumb-heading animated rollIn">
-                  <a ng-click="$ctrl.workoutModal(workout)" title="">
+                  <a ui-sref="app.workout({id: workout.id})" title="">
                       {{workout.title}}
                   </a>
                   <small>{{workout.description}}</small>

@@ -14,36 +14,34 @@ export default class Item {
     }).then((res) => res.data);
   }
 
-  update(photo){
+  upload(item){
     return this._$http({
-      url: this._AppConstants.api + '/admin/items/' + photo.id+ '/update_item',
+      url: this._AppConstants.api + '/admin/items/' + item.id+ '/update_item',
       method: 'POST',
-      data: photo
+      data: item
     }).then((res) => res.data);
   }
 
-  newCat(cat){
-    return this._$http({
-      url:  this._AppConstants.api + '/admin/item_categories',
-      method: 'POST',
-      data: cat
-    }).then((res) => res.data)
-  }
-
-  newVideo(photo){
+  save(item){
     return this._$http({ 
       url: this._AppConstants.api + '/admin/items/',
       method: 'POST',
-      data: photo
+      data: item
     }).then((res) => res.data);
   }
-  // Retrieve a user's profile
-  // get() {
-  //   return this._$http({ 
-  //     url: this._AppConstants.api + '/profiles/' + username,
-  //     method: 'GET'
-  //   }).then((res) => res.data.profile);
-  // }
 
+  update(item){
+    return this._$http({
+      url: this._AppConstants.api + '/admin/items/' + item.id,
+      method: 'PUT',
+      data: item
+    }).then((res) => res.data);
+  }
 
+  delete(item){
+    return this._$http({
+      url: this._AppConstants.api + '/admin/items/' + item.id,
+      method: 'DELETE'
+    }).then((res) => res.data);
+  }
 }

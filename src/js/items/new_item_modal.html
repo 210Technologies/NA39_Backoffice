@@ -47,6 +47,19 @@
             <input type="text" class="form-control" id="" placeholder="Lien" ng-model="$ctrl._new_item.link">
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Status</label>
+            <div class="col-sm-6">
+                <label class="radio-inline">
+                    <input type="radio" id=""  value="online" ng-model="$ctrl._new_item.status">
+                    Online
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" id=""  value="offline" ng-model="$ctrl._new_item.status">
+                    Offline
+                </label>
+            </div>
+        </div>
     </form>
 </div>
     

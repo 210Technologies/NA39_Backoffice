@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "env": {
+    "local": {
+      "AppConstants": {
+        "api": "http://localhost/"
+      }
+    },
+    "production": {
+      "AppConstants": {
+        "api": "https://api.production.com/"
+      }
+    }
+  }
+}

@@ -18,8 +18,11 @@ class PhotoModalCtrl {
   }
 
   getDate(date){
-    return $.datepicker.formatDate('dd MM yy', new Date(date))
+    var d = new Date(date)
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
   }
+
   uploadPhoto(item) {
     let ctrl = this
     item.url = this._AppConstants.api + '/admin/photos/'+ this._photo.id
@@ -30,9 +33,20 @@ class PhotoModalCtrl {
     }
     item.onComplete = function(response){
       ctrl._photo = response;
-      this.remove()
+      // this.remove()
     }
     item.upload()
+  }
+
+  deletePhoto(){
+    this._Photo.delete(this._photo).then(
+      (res) => {
+        this.modalInstance.close('delete')
+      },
+      (err) => {
+        this._showEdit = false
+      }
+    )
   }
 
   savePhoto(){

@@ -14,7 +14,6 @@ var sourcemaps    = require('gulp-sourcemaps');
 var image         = require('gulp-image');
 var concatCss     = require('gulp-concat-css');
 var concat        = require('gulp-concat');
- 
 
 
 // var fonts         = require('gulp-font')
@@ -88,6 +87,8 @@ gulp.task('views', function() {
       .pipe(gulp.dest('./src/js/config/'));
 });
 
+
+
 // This task is used for building production ready
 // minified JS/CSS files into the dist/ folder
 gulp.task('build', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fonts'], function() {
@@ -103,18 +104,18 @@ gulp.task('build', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fon
 
 gulp.task('default', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fonts'], function() {
 
-  // browserSync.init(['./build/**/**.**'], {
-  //   server: "./build",
-  //   port: process.env.PORT || 5000,
-  //   notify: false,
-  //   ui: {
-  //     port: 4001
-  //   }
-  // });
+  browserSync.init(['./build/**/**.**'], {
+    server: "./build",
+    port: process.env.PORT || 5000,
+    notify: false,
+    ui: {
+      port: 4001
+    }
+  });
   
-  // gulp.watch("src/index.html", ['html']);
-  // gulp.watch(viewFiles, ['views']);
-  // gulp.watch(jsFiles, ['browserify']);
+  gulp.watch("src/index.html", ['html']);
+  gulp.watch(viewFiles, ['views']);
+  gulp.watch(jsFiles, ['browserify']);
 });
 
 gulp.task('heroku:production', function() {

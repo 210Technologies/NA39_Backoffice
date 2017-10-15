@@ -11,5 +11,8 @@ layoutModule.component('appHeader', AppHeader);
 import AppSidebar from './sidebar.component';
 layoutModule.component('appSidebar', AppSidebar);
 
+import AppDeteleModal from './delete_modal.component';
+layoutModule.component('appDeleteModal', AppDeteleModal);
+
 
 export default layoutModule;

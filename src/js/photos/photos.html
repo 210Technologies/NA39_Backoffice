@@ -57,6 +57,7 @@
       <script type="text/javascript" src="js/isotope.js"></script>
       <script type="text/javascript" src="js/portfolio-demo.js"></script>
       <script type="text/javascript" src="js/dropzone.js"></script>
+      <script type="text/javascript" src="js/datepicker.js"></script>
 
 
 
@@ -64,24 +65,20 @@
       <div class="portfolio-controls mrg10L mrg10R radius-all-4 portfolio-nav-alt bg-blue clearfix controls">
           <div class="container text-center">
               <ul class="float-none">
-                  <li class="filter" data-filter="all" ng-click="$ctrl.selected_cat = undefined">View all </li>
-                  <li ng-repeat= "category in $ctrl._category_photos" class="filter" data-filter="hover_{{category.id}}" ng-click="$ctrl.photosCategory(category)">{{category.name}}</li>
-                  <!-- <li class="filter" data-filter="hover_1">Illustrations</li>
-            <li class="filter" data-filter="hover_2">Food &amp; Drink</li>
-            <li class="filter" data-filter="hover_3">Mobile applications</li>
-                    <li class="filter" data-filter="hover_4">Gadgets &amp; Effects</li> -->
+                  <li ng-class="{'filter active': $ctrl._selected_cat == undefined, 'filter': $ctrl._selected_cat != undefined}" ng-click="$ctrl._selected_cat = undefined">View all </li>
+                  <li ng-repeat= "category in $ctrl._category_photos" ng-class="{'filter active': $ctrl._selected_cat == category, 'filter': $ctrl._selected_cat != category}" ng-click="$ctrl._selected_cat = category">{{category.name}}</li>
               </ul>
           </div>
       </div> 
 
       <div class="clearfix">
-      <div class="panel" ng-show="$ctrl._selected_cat != undefined">
+      <div class="panel" ng-show="$ctrl._selected_cat != undefined && $ctrl._selected_cat.edit != true">
             <div class="panel-body" style="text-align:center;">
                 <button class="btn btn-primary" ng-click="$ctrl.newPhotoModal($ctrl._selected_cat)">
                     <i class="glyph-icon icon-photo"></i>
                     Nouvelle photo
                 </button>
-                <button class="btn btn-default" ng-click="$ctrl.deleteCat($ctrl._selected_cat)">
+                <button class="btn btn-default" ng-click="$ctrl._selected_cat.edit = true">
                     <i class="glyph-icon icon-pencil"></i>
                     Editer Catégorie
                 </button>
@@ -91,9 +88,39 @@
                 </button>
             </div>
         </div>
-      <ul mixitup="portfolio-grid" class="reset-ul row" entities='$ctrl._photos' style="display:flex;flex-direction: row;flex-wrap: wrap;">
+      <div class="panel" ng-show="$ctrl._selected_cat !== undefined && $ctrl._selected_cat.edit == true">
+            <div class="panel-body">
+              <div class="row">
+                  <div class="col-xs-10">
+                      <h3 class="title-hero">
+                        Editer catégorie
+
+                  </h3>
+                  </div>
+                  <div class="col-xs-2">
+                      <h3 class="title-hero pull-right" style="cursor:pointer;" ng-click="$ctrl._selected_cat.edit = false">X</h3>
+                  </div>
+              </div>
+                  
+                  <form ng-submit="$ctrl.submitCat()" class="form-horizontal bordered-row">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"></label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="" placeholder="Nom" ng-model="$ctrl._selected_cat.name">
+                        </div>
+                    </div>
+                 </form>
+              </div>
+              <div class="panel-footer" style="text-align:center;">
+                  <button type="button" class="btn btn-primary " type="submit" ng-click="$ctrl.updateCat()">
+                      <i class=" glyph-icon tooltip-button icon-floppy-o"></i>
+                      Enregistrer
+                  </button>
+              </div>
+        </div>
+      <ul  class="reset-ul row"  style="display:flex;flex-direction: row;flex-wrap: wrap;">
         
-        <li ng-repeat="photo in $ctrl._photos|orderBy:'-height'" class="col-lg-3 col-sm-6 col-md-4 mix hover_{{photo.category_photo_id}}" data-cat="{{photo.category_photo_id}}">
+        <li ng-repeat="photo in $ctrl._photos | filter:{category_photo_id:$ctrl._selected_cat.id}|orderBy:'-height'" class="col-lg-3 col-sm-6 col-md-4 ">
             <div class="thumbnail-box-wrapper">
                 <div class="thumbnail-box" ng-click="$ctrl.photoModal(photo)"   >
                     <a href="javascript:void(0)" title="My Account" class="user-profile clearfix"  aria-expanded="false"></a>

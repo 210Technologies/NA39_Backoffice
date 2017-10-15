@@ -37,6 +37,7 @@
                       {{exercise.title}}
                   </a>
                   <small>{{exercise.description}}</small>
+                  <span ng-class="{'bs-label label-danger': exercise.status == 'offline', 'bs-label label-success': exercise.status == 'online'}" style="position: absolute;right: 10px;">{{exercise.status}}</span>
               </h3>
             </div>
           </div>

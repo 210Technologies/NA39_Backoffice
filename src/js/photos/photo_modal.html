@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <button type="button" class="close" ng-click="$ctrl.modalInstance.close($ctrl._video)">&times;</button>
+    <button type="button" class="close" ng-click="$ctrl.modalInstance.close($ctrl._photo)">&times;</button>
     <h4 class="modal-title">{{$ctrl._photo.title}}</h4>
 </div>
 
@@ -26,44 +26,8 @@
                 <img class="lazy" ng-src="{{$ctrl._photo.src.url}}" data-original="{{$ctrl._photo.src.url}}"  alt="" style="display: block;">
              </div>
         </div>
-        <div class="col-md-12">
-            <div class="img-modal"  >
-              <div class="js input-file-container">
-                <input class="input-file" type="file" uploader="$ctrl._photo_uploader" nv-file-select></input>
-                <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
-                  Chosir une photo...
-                </label>
-              </div>
-            </div>
-        </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="content-box" ng-repeat="item in $ctrl._photo_uploader.queue">
-                <div class="content-box-wrapper">
-                    Name: <span ng-bind="item.file.name"></span>
-                    <div class="progressbar" data-value="{{item.progress}}">
-                        <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
-                            <div class="progress-label">{{item.progress}}%</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="button-pane">
-                    <button ng-click="$ctrl.uploadPhoto(item)" class="btn btn-success">
-                        <div class=" icon-typicons-export"> </div>
-                    </button>
-                    <button ng-click="item.cancel()" class="btn btn-warning" title="Stop">
-                        <div class=" icon-typicons-block"> </div>
-                    </button>
-                    <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer">
-                        <div class=" icon-typicons-cancel"> </div>
-                    </button>
-
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 
@@ -82,6 +46,46 @@
                 <textarea name="" id="" class="form-control" ng-model="$ctrl._photo.description"></textarea>
             </div>
         </div>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="img-modal" ng-hide="$ctrl._photo_uploader.queue.length > 0">
+                    <div class="js input-file-container">
+                        <input class="input-file" type="file" uploader="$ctrl._photo_uploader" nv-file-select></input>
+                        <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
+                            Chosir une photo...
+                        </label>
+                    </div>
+                </div>
+                <div class="content-box" ng-repeat="item in $ctrl._photo_uploader.queue">
+                    <div class="content-box-wrapper">
+                    Name: <span ng-bind="item.file.name"></span>
+                    <div class="progressbar" data-value="{{item.progress}}">
+                        <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
+                            <div class="progress-label">{{item.progress}}%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-pane">
+                    <button ng-click="$ctrl.uploadPhoto(item)" class="btn btn-success">
+                        <div class=" icon-typicons-export"> </div>
+                        Upload
+                    </button>
+                    <button ng-click="item.cancel()" class="btn btn-warning" title="Stop">
+                        <div class=" icon-typicons-block"> </div>
+                        Stop
+                    </button>
+                    <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer">
+                        <div class=" icon-typicons-cancel"> </div>
+                        Cancel
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
     </form>
 </div>
 
@@ -99,5 +103,6 @@
         <div class=" icon-typicons-cancel-outline"> </div>
         <!-- <i class="fa fa-edit"></i>  -->
     </button>
+    <button type="button" class="btn btn-danger" ng-click="$ctrl.deletePhoto()">Supprimer</button>
     <button type="button" class="btn btn-primary" ng-click="$ctrl.savePhoto()">Enregistrer</button>
 </div>

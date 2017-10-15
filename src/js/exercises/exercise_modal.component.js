@@ -43,6 +43,21 @@ class ExerciseModalCtrl {
     item.upload()
   }
 
+  saveExercise(){
+    this._Exercise.update(this._exercise).then(
+      (res) => {
+        this._exercise = res
+        this._showEdit = false
+      }
+    )
+  }
+  deleteExercise(){
+    this._Exercise.delete(this._exercise).then(
+      (res) => {
+        this.modalInstance.close('delete')
+      }
+    )
+  }
 }
 
 let AppHeader = {

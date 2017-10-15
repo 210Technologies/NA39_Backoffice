@@ -1,5 +1,5 @@
 class ItemsCtrl {
-  constructor(item_categories, items, Item, $uibModal) {
+  constructor(item_categories, items, Item, ItemCategory, $uibModal, $filter) {
     'ngInject';
     this._items = items
     this._item_categories = item_categories
@@ -7,36 +7,75 @@ class ItemsCtrl {
     this._$uibModal = $uibModal
     this._newCat = false;
     this._new_item_category = {}
-    // Bind is req'd because the logout method assumes
-    // the execution context is within the User object.
-    // this.logout = User.logout.bind(User); 
+    this._ItemCategory = ItemCategory
+    this.$_filter = $filter
   }
 
-  videoModal(items){
+  itemModal(item){
     let ctrl = this
       var modalInstance = this._$uibModal.open({
                 
                 component: 'appItemModal',
                 resolve:{
-                    items: function() {
-                      return items;
+                    item: function() {
+                      return item;
                     }
                 }
                 
            })
     modalInstance.result.then(function (result) {
-      ctrl._items[ctrl._items.indexOf(items)] = result
+      if (result == 'delete'){
+        ctrl._items.splice(ctrl._items.indexOf(item), 1)
+      }else{
+        ctrl._items[ctrl._items.indexOf(item)] = result
+      }
     });
   }
 
   submitCat(){
-    this._Item.newCat(this._new_item_category).then(
+    this._ItemCategory.save(this._new_item_category).then(
       (res) => {
         this._item_categories.push(res)
         this._newCat = false;
       },
       (err) => {err.data}
     )
+  }
+
+  updateCat(){
+    this._ItemCategory.update(this.selected_cat).then(
+      (res) => {
+        this.selected_cat.edit = false;
+      },
+      (err) => {err.data}
+    )
+  }
+
+  deleteCat(category){
+    let ctrl = this
+    var modalInstance = this._$uibModal.open({
+        component: 'appDeleteModal',
+        resolve:{
+            item: function(){
+              return category
+            },
+            service: function(){
+              return ctrl._ItemCategory
+            },
+            message: function(){
+              return 'Delete this category will delete all his items, are you sure?'
+            }
+        }
+   }).result.then(function (result) {
+      if (result == 'ok'){
+        ctrl._item_categories.splice(ctrl._item_categories.indexOf(category), 1)
+        var videos = ctrl.$_filter('filter')(ctrl._items, {category_photo_id: ctrl.selected_cat.id})
+        for (var i = videos.length -1; i >= 0; i--)
+          ctrl._items.splice(ctrl._items.indexOf(videos[i]),1);
+        ctrl.selected_cat = ctrl._item_categories[ctrl._item_categories.length - 1]
+      }
+      
+    });
   }
 
   newItemModal(category){

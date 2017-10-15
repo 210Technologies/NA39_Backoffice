@@ -22,14 +22,6 @@ export default class Photo {
     }).then((res) => res.data);
   }
 
-  newCat(cat){
-    return this._$http({
-      url:  this._AppConstants.api + '/admin/category_photos',
-      method: 'POST',
-      data: cat
-    }).then((res) => res.data)
-  }
-
   newVideo(photo){
     return this._$http({ 
       url: this._AppConstants.api + '/admin/photos/',
@@ -37,13 +29,11 @@ export default class Photo {
       data: photo
     }).then((res) => res.data);
   }
-  // Retrieve a user's profile
-  // get() {
-  //   return this._$http({ 
-  //     url: this._AppConstants.api + '/profiles/' + username,
-  //     method: 'GET'
-  //   }).then((res) => res.data.profile);
-  // }
 
-
+  delete(photo){
+    return this._$http({ 
+      url: this._AppConstants.api + '/admin/photos/' + photo.id,
+      method: 'DELETE'
+    }).then((res) => res.data);
+  }
 }
