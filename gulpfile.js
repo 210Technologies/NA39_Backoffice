@@ -104,15 +104,15 @@ gulp.task('build', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fon
 
 gulp.task('default', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fonts'], function() {
 
-  browserSync.init(['./build/**/**.**'], {
-    server: "./build",
-    port: process.env.PORT || 5000,
-    notify: false,
-    open: false,
-    ui: {
-      port: 4001
-    }
-  });
+  // browserSync.init(['./build/**/**.**'], {
+  //   server: "./build",
+  //   port: process.env.PORT || 5000,
+  //   notify: false,
+  //   open: false,
+  //   ui: {
+  //     port: 4001
+  //   }
+  // });
   
   // gulp.watch("src/index.html", ['html']);
   // gulp.watch(viewFiles, ['views']);
