@@ -114,9 +114,9 @@ gulp.task('default', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'f
     }
   });
   
-  gulp.watch("src/index.html", ['html']);
-  gulp.watch(viewFiles, ['views']);
-  gulp.watch(jsFiles, ['browserify']);
+  // gulp.watch("src/index.html", ['html']);
+  // gulp.watch(viewFiles, ['views']);
+  // gulp.watch(jsFiles, ['browserify']);
 });
 
 gulp.task('heroku:production', function() {
