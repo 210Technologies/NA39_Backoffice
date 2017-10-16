@@ -1,7 +1,6 @@
 export default class Exercise {
   constructor(AppConstants, $http) {
     'ngInject';
-    console.log(AppConstants.api)
     this._AppConstants = AppConstants;
     this._$http = $http;
 

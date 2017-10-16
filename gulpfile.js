@@ -15,7 +15,7 @@ var image         = require('gulp-image');
 var concatCss     = require('gulp-concat-css');
 var concat        = require('gulp-concat');
 var gulpNgConfig = require('gulp-ng-config');
-require('dotenv').load();
+// require('dotenv').load();
 var env = process.env.NODE_ENV || 'local'
 
 
@@ -63,9 +63,10 @@ gulp.task('minify-css', function () {
 });
 gulp.task('configuration', function(){
   return gulp.src('configApp.json')
-  .pipe(gulpNgConfig('app.EnvironmentConfig', {
+  .pipe(gulpNgConfig('app', {
     environment: 'env.' + env,
-    wrap: true
+    wrap: true,
+    createModule: false
   }))
       // Start piping stream to tasks!
       .pipe(gulp.dest('./src/js/config'));
