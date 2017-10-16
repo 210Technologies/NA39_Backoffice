@@ -17,7 +17,7 @@ var concat        = require('gulp-concat');
 var gulpNgConfig = require('gulp-ng-config');
 var env = process.env.NODE_ENV || 'local'
 
-if (ENV === 'local') {
+if (env === 'local') {
   require('dotenv').load();
 }
 
