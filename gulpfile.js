@@ -15,11 +15,8 @@ var image         = require('gulp-image');
 var concatCss     = require('gulp-concat-css');
 var concat        = require('gulp-concat');
 var gulpNgConfig = require('gulp-ng-config');
+require('dotenv').load();
 var env = process.env.NODE_ENV || 'local'
-
-if (env === 'local') {
-  require('dotenv').load();
-}
 
 
 // var fonts         = require('gulp-font')
