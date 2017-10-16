@@ -1,5 +1,5 @@
 var env = process.env.NODE_ENV || 'develop';
-console.log(process.env.NODE_ENV)
+console.log(process.env)
 var AppConstants= {}
 if (env == 'develop'){
 	AppConstants = {
