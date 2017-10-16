@@ -15,6 +15,7 @@ var image         = require('gulp-image');
 var concatCss     = require('gulp-concat-css');
 var concat        = require('gulp-concat');
 var gulpNgConfig = require('gulp-ng-config');
+var env = process.env.NODE_ENV || 'local'
 
 
 // var fonts         = require('gulp-font')
@@ -60,7 +61,6 @@ gulp.task('minify-css', function () {
     .pipe(gulp.dest('./build/styles'));
 });
 gulp.task('configuration', function(){
-  var env = process.env.NODE_ENV || 'local'
   return gulp.src('configApp.json')
   .pipe(gulpNgConfig('app.EnvironmentConfig', {
     environment: 'env.' + env,
