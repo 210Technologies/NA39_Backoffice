@@ -14,6 +14,7 @@ var sourcemaps    = require('gulp-sourcemaps');
 var image         = require('gulp-image');
 var concatCss     = require('gulp-concat-css');
 var concat        = require('gulp-concat');
+var gulpNgConfig = require('gulp-ng-config');
 
 
 // var fonts         = require('gulp-font')
@@ -58,8 +59,18 @@ gulp.task('minify-css', function () {
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('./build/styles'));
 });
-
+gulp.task('configuration', function(){
+  var env = process.env.NODE_ENV || 'local'
+  return gulp.src('configApp.json')
+  .pipe(gulpNgConfig('app.EnvironmentConfig', {
+    environment: 'env.' + env,
+    wrap: true
+  }))
+      // Start piping stream to tasks!
+      .pipe(gulp.dest('./src/js/config'));
+})
 gulp.task('browserify', ['views'], function() {
+  
   return browserify('./src/js/app.js')
       .transform(babelify, {presets: ["es2015"]})
       .transform(ngAnnotate)
@@ -102,8 +113,8 @@ gulp.task('build', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fon
   return merge(html,js);
 });
 
-gulp.task('default', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fonts'], function() {
-
+gulp.task('default', ['html', 'browserify','configuration', 'minify-css', 'image', 'scripts', 'fonts'], function() {
+  
   // browserSync.init(['./build/**/**.**'], {
   //   server: "./build",
   //   port: process.env.PORT || 5000,
@@ -117,8 +128,4 @@ gulp.task('default', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'f
   // gulp.watch("src/index.html", ['html']);
   // gulp.watch(viewFiles, ['views']);
   // gulp.watch(jsFiles, ['browserify']);
-});
-
-gulp.task('heroku:production', function() {
-  
 });

@@ -3,12 +3,16 @@
   "env": {
     "local": {
       "AppConstants": {
-        "api": "http://localhost/"
+        "api": "http://localhost:3000/",
+        "jwtKey": "jwtToken",
+        "appName": "Conduit"
       }
     },
     "production": {
       "AppConstants": {
-        "api": "https://api.production.com/"
+        "api": "https://na39api-prod.herokuapp.com",
+        "jwtKey": "jwtToken",
+        "appName": "Conduit"
       }
     }
   }

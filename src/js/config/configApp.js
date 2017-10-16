@@ -1,3 +1,5 @@
-import angular from 'angular';
-export default angular.module("app", [])
-.constant("AppConstants", {"api":"https://api.production.com/"});
+(function () { 
+ return angular.module("app.EnvironmentConfig", [])
+.constant("AppConstants", {"api":"http://localhost:3000/","jwtKey":"jwtToken","appName":"Conduit"});
+
+})();
