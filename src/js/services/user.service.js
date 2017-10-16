@@ -2,6 +2,7 @@ export default class User {
    constructor(JWT, AppConstants, $http, $state, $q, jwtHelper) {
     'ngInject';
     // Object to store our user properties
+    console.log(AppConstants.api)
     this._JWT = JWT;
 		this._AppConstants = AppConstants;
     this._$http = $http;
