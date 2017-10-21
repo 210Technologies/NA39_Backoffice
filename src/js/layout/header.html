@@ -1,5 +1,4 @@
-
-<div id="page-header" class="bg-gradient-9" ng-show="$ctrl.navbar == true">
+<div id="page-header" class="bg-gradient-9" ng-show="$ctrl.navbar">
 
     <!-- burger for mobile navigation -->
     <div id="mobile-navigation">
@@ -78,7 +77,7 @@
                     </ul> -->
 
                     <div class="pad5A button-pane button-pane-alt text-center">
-                        <a href="#" class="btn display-block font-normal btn-danger">
+                        <a ng-click="$ctrl.logout()" class="btn display-block font-normal btn-danger">
                             <i class="glyph-icon icon-power-off"></i>
                             Logout
                         </a>

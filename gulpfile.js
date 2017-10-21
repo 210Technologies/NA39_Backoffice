@@ -121,7 +121,6 @@ gulp.task('default', ['html', 'browserify','configuration', 'minify-css', 'image
   //   server: "./build",
   //   port: process.env.PORT || 5000,
   //   notify: false,
-  //   open: false,
   //   ui: {
   //     port: 4001
   //   }

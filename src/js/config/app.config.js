@@ -5,7 +5,6 @@ function AppConfig($httpProvider, $stateProvider, $locationProvider, $urlRouterP
   
   // Push our interceptor for auth
   $httpProvider.interceptors.push(authInterceptor);
-
   // if (!$httpProvider.defaults.headers.get) {
   //       $httpProvider.defaults.headers.get = {};    
   //   }    

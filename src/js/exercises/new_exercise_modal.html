@@ -6,8 +6,8 @@
 <div class="modal-body">
     <div id="form-wizard-3" class="form-wizard">
         <ul>
-            <li id="link-1" class="active">
-                <a href="#step-1" data-toggle="tab" aria-expanded="true">
+            <li class="active"  ng-class="{'active': $ctrl.next_step == 1}">
+                <a  style="text-decoration: none">
                     <label class="wizard-step">1</label>
                   <span class="wizard-description">
                      Informations
@@ -15,8 +15,8 @@
                   </span>
                 </a>
             </li>
-            <li id="link-2" class="">
-                <a href="#step-2" data-toggle="tab">
+            <li  class="" ng-class="{'active': $ctrl.next_step == 2}">
+                <a  style="text-decoration: none">
                     <label class="wizard-step">2</label>
               <span class="wizard-description">
                  Exercise
@@ -24,8 +24,8 @@
               </span>
                 </a>
             </li>
-            <li id="link-3" class="">
-                <a href="#step-3" data-toggle="tab">
+            <li  class="" ng-class="{'active': $ctrl.next_step == 3}">
+                <a  style="text-decoration: none">
                     <label class="wizard-step">3</label>
               <span class="wizard-description">
                 Cover
@@ -33,8 +33,8 @@
               </span>
                 </a>
             </li>
-            <li id="link-4">
-                <a href="#step-4" data-toggle="tab">
+            <li ng-class="{'active': $ctrl.next_step == 4}">
+                <a style="text-decoration: none">
                     <label class="wizard-step">4</label>
               <span class="wizard-description">
                  Status
@@ -44,7 +44,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active" id="step-1">
+            <div class="tab-pane active" ng-show="$ctrl.next_step == 1">
                 <form class="form-horizontal bordered-row">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Title</label>
@@ -68,10 +68,11 @@
                 </form>
             </div>
 
-            <div class="tab-pane" id="step-2">
+            <div class="tab-pane active" ng-show="$ctrl.next_step == 2">
                 <form class="form-horizontal bordered-row">
                     <div class="form-group">
                         <div class="col-sm-8 col-sm-offset-2">
+
                             <div class="img-modal" ng-hide="$ctrl._src_uploader.queue[0]" >
                               <div class="js input-file-container">
                                 <input class="input-file" type="file" uploader="$ctrl._src_uploader" nv-file-select></input>
@@ -97,7 +98,7 @@
                                     </div>
                                 </div>
 
-                                <div class="button-pane">
+                                <!-- <div class="button-pane">
                                     <button ng-click="$ctrl.uploadVideo(item)" class="btn btn-success">
                                         <div class=" icon-typicons-export"> </div>
                                         Upload
@@ -111,15 +112,16 @@
                                         Cancel
                                     </button>
 
-                                </div>
+                                </div> -->
                             </div>
+                            <div style="font-size: 10px; color: #C4C4C4">Uniquement des vidéos au format MP4.</div>
                         </div>
                         
                     </div>
                 </form>
             </div>
 
-            <div class="tab-pane " id="step-3">
+            <div class="tab-pane active" ng-show="$ctrl.next_step == 3">
                  <form class="form-horizontal bordered-row">
                     <div class="form-group">
                         <div class="col-sm-8 col-sm-offset-2">
@@ -159,7 +161,7 @@
                                     </div>
                                 </div>
 
-                                <div class="button-pane">
+                                <!-- <div class="button-pane">
                                     <button ng-click="$ctrl.uploadCover(item)" class="btn btn-success">
                                         <div class=" icon-typicons-export"> </div>
                                     </button>
@@ -170,23 +172,24 @@
                                         <div class=" icon-typicons-cancel"> </div>
                                     </button>
 
-                                </div>
+                                </div> -->
                             </div>
+                            <div style="font-size: 10px; color: #C4C4C4">Les format PNG, JPEG, JPG, et GIF sont supportés. Il est conseillé pour des raisons d'affichage de rajouter uniquement des photos en 1:1 ou 2:3.</div>
                         </div>
                 </div>
             </form>
             </div>
-                    <div class="tab-pane" id="step-4">
+                    <div class="tab-pane active" ng-show="$ctrl.next_step == 4">
                         <form class="form-horizontal bordered-row">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Status</label>
                         <div class="col-sm-6">
                             <label class="radio-inline">
-                                <input type="radio" id=""  value="online" ng-model="$ctrl._new_exercise.status">
+                                <input type="radio" id=""  value="online" ng-model="$ctrl._new_exercise.status"  ng-click= "$ctrl.enableFinish()">
                                 Online
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" id=""  value="offline" ng-model="$ctrl._new_exercise.status">
+                                <input type="radio" id=""  value="offline" ng-model="$ctrl._new_exercise.status" ng-click= "$ctrl.enableFinish()">
                                 Offline
                             </label>
                         </div>
@@ -204,20 +207,27 @@
 
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.firstStep()" ng-show="$ctrl.step == 1">
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.nextStep()" ng-disabled="$ctrl.step < $ctrl.next_step" ng-show="$ctrl._load == false && $ctrl.step < 4">
         Next
         <i class="glyph-icon icon-arrow-right"></i>
     </button>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.secondStep()" ng-show="$ctrl.step == 2">
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.nextStep()"  ng-show="$ctrl._load == false && $ctrl.step == 4">
+        Finish
+        <i class="glyph-icon icon-arrow-right"></i>
+    </button>
+    <div class="row" ng-show="$ctrl._load == true">
+        <div class="remove-border glyph-icon demo-icon tooltip-button icon-spin-6 icon-spin" style= "float:right;margin: 10px auto;color:#39d2b4"></div>
+    </div>
+    <!-- <button type="button" class="btn btn-primary" ng-click="$ctrl.secondStep()" ng-show="$ctrl.step == 2" ng-disabled="$ctrl.step != 2">
         Next
         <i class="glyph-icon icon-arrow-right"></i>
     </button>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.thirdStep()" ng-show="$ctrl.step == 3">
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.thirdStep()" ng-show="$ctrl.step == 3" ng-disabled="$ctrl.step != 2">
         Next
         <i class="glyph-icon icon-arrow-right"></i>
     </button>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.fourthStep()" ng-show="$ctrl.step == 4">
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.fourthStep()" ng-show="$ctrl.step == 4" ng-disabled="$ctrl.step != 2">
         Save
         <i class="glyph-icon icon-save"></i>
-    </button>
+    </button> -->
 </div>

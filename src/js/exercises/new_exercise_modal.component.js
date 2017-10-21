@@ -9,49 +9,59 @@ class NewExerciseModalCtrl {
     this._showEdit = false
     this._new_exercise = {}
     this.step = 1
-    
+    this.next_step = 1
+    this._load = false
+    this._src_uploader.onAfterAddingFile = function(){
+      $ctrl.step += 1
+    }
+    this._cover_uploader.onAfterAddingFile = function(){
+      console.log('la')
+      $ctrl.step += 1
+    }  
   }
+
+  enableFinish(){
+    console.log(this.step)
+    if (this.step == 4){return}
+    this.step += 1
+  }
+
+  nextStep(){
+    this._load = true
+    if (this.step == 1){
+      this.firstStep()
+    }else if (this.step == 2){
+        this.uploadVideo()
+    }else if (this.step == 3){
+        this.uploadCover()
+    }else{
+      this.next_step += 1
+    }
+  }
+
   firstStep(){
+
     this._Exercise.save(this._new_exercise).then(
       (res) => {
+        this._load = false
         this._new_exercise = res
-        $('.tab-pane').hide()
-        $('#step-2').show()
-        $('li').removeClass('active')
-        $('li#link-2').addClass('active')
-        this.step = 2
+        this.next_step += 1
       }
     )
-  }
-
-  secondStep(){
-    if (!this.src_set){return}
-    $('.tab-pane').hide()
-    $('#step-3').show()
-    $('li').removeClass('active')
-    $('li#link-3').addClass('active')
-    this.step = 3
-  }
-
-  thirdStep(){
-    if (!this.cover_set){return}
-    $('.tab-pane').hide()
-    $('#step-4').show()
-    $('li').removeClass('active')
-    $('li#link-4').addClass('active')
-    this.step = 4
   }
 
   fourthStep(){
     this._Exercise.update(this._new_exercise).then(
       (res) => {
+        this._load = false
         this.modalInstance.close(res)
       }
     )
   }
 
-  uploadVideo(item) {
+  uploadVideo() {
     let ctrl = this
+    var item = this._src_uploader.queue[0]
     item.url = this._AppConstants.api + '/admin/exercises/'+ this._new_exercise.id
     item.alias = 'exercise[src]'
     item.method = 'PUT'
@@ -62,12 +72,15 @@ class NewExerciseModalCtrl {
     item.onComplete = function(response){
       ctrl._new_exercise = response;
       ctrl.src_set = true
+      ctrl._load = false
+      ctrl.next_step += 1
     }
     item.upload()
   }
 
-  uploadCover(item) {
+  uploadCover() {
     let ctrl = this
+    var item = this._cover_uploader.queue[0]
     item.url = this._AppConstants.api + '/admin/exercises/'+ this._new_exercise.id
     item.alias = 'exercise[cover]'
     item.method = 'PUT'
@@ -77,6 +90,8 @@ class NewExerciseModalCtrl {
     item.onComplete = function(response){
       ctrl._new_exercise = response;
       ctrl.cover_set = true
+      ctrl._load = false
+      ctrl.next_step += 1
     }
     item.upload()
   }

@@ -19,7 +19,7 @@
       <div class="row" style="display:flex;flex-direction: row;flex-wrap: wrap;">
         <div class="col-md-4 col-lg-3" ng-repeat="exercise in $ctrl._exercises">
           <div class="thumbnail-box-wrapper">
-            <div class="thumbnail-box" ng-click="$ctrl.exerciseModal(exercise)">
+            <div class="thumbnail-box" ng-click="$ctrl.exerciseModal(exercise)" style="max-height: 150px;">
               <a class="thumb-link" href="javascript:void(0)" title=""></a>
               <div class="thumb-content">
                 <div class="center-vertical">
@@ -31,10 +31,11 @@
               <div class="thumb-overlay bg-black"></div>
               <img class="lazy" ng-src="{{exercise.cover.url}}" data-original="../../assets/image-resources/stock-images/img-20.jpg" alt="" style="display: block;">
             </div>
-            <div class="thumb-pane">
+            <div class="thumb-pane" style="height: 150px;">
               <h3 class="thumb-heading animated rollIn">
                   <a ng-click="$ctrl.exerciseModal(exercise)" title="">
                       {{exercise.title}}
+                      {{exercise.id}}
                   </a>
                   <small>{{exercise.description}}</small>
                   <span ng-class="{'bs-label label-danger': exercise.status == 'offline', 'bs-label label-success': exercise.status == 'online'}" style="position: absolute;right: 10px;">{{exercise.status}}</span>
