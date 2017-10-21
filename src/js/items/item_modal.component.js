@@ -11,7 +11,7 @@ class ItemModalCtrl {
 
   uploadItem(item) {
     let ctrl = this
-    item.url = this._AppConstants.api + 'admin/items/'+ this._item.id
+    item.url = this._AppConstants.api + '/admin/items/'+ this._item.id
     item.alias = 'item[src]'
     item.method = 'PUT'
     item.onProgress = function(progress){
