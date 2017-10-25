@@ -118,7 +118,6 @@ gulp.task('build', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fon
 gulp.task('default', ['html', 'browserify','configuration', 'minify-css', 'image', 'scripts', 'fonts'], function() {
     if (env == 'local'){
        browserSync.init(['./build/**/**.**'], {
-      }
       server: "./build",
       port: process.env.PORT || 5000,
       notify: false,
