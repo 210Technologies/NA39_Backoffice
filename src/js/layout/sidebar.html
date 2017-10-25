@@ -1,31 +1,26 @@
 <div id="page-sidebar"  ng-show="$ctrl.navbar == true">
 	<div class="scroll-sidebar">
     <ul id="sidebar-menu" >
-	    <li class="header"><span>Vue d'ensemble</span></li>
+	    <!-- <li class="header"><span>Vue d'ensemble</span></li>
 	    <li ui-sref-active="sfHover">
 	        <a href="#" title="Dashboard" class="sf-without-ul">
 	            <i class="glyph-icon icon-linecons-beaker"></i>
 	            <span>Dashboard</span>
 	        </a>
-	    </li>
+	    </li> -->
 	    <li class="header"><span>Général</span></li>
-	    <li ui-sref-active="sfHover">
-	        <a href="#" title="NewsFeed" class="sf-without-ul">
-	            <i class="glyph-icon icon-linecons-note"></i>
-	            <span>NewsFeed</span>
-	        </a>
-	    </li>
         <li>
             <a href="javascript:void(0)" title="Activités" class="sf-with-ul">
                 <i class="glyph-icon icon-linecons-fire"></i>
                 <span>Activités</span>
-                <span class="bs-label label-primary">Hot</span>
+                <!-- <span class="bs-label label-primary">Hot</span> -->
             </a>
             <div class="sidebar-submenu">
 
             <ul>
                 <li ><a ui-sref-active="sfActive" ui-sref="app.exercises" title="Exercises"><span>Exercices</span></a></li>
                 <li ><a ui-sref-active="sfActive" ui-sref="app.workouts" title="Workouts"><span>Workouts</span></a></li>
+                <li ><a ui-sref-active="sfActive" ui-sref="app.steps" title="Etapes de workout"><span>Étapes de workout</span></a></li>
                 <li ><a ui-sref-active="sfActive" ui-sref="app.challenges" title="Challenges"><span>Challenges</span></a></li>
             </ul>
 
@@ -50,12 +45,12 @@
         </a>
     </li>
 
-    <li ui-sref-active="sfHover">
+    <!-- <li ui-sref-active="sfHover">
         <a href="#" title="Equipement" class="sf-without-ul">
             <i class="glyph-icon icon-linecons-user"></i>
             <span>Utilisateurs</span>
         </a>
-
+    </li> -->
     </ul><!-- #sidebar-menu -->
 
 

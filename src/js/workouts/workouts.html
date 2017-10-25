@@ -19,7 +19,7 @@
       <div class="row" style="display:flex;flex-direction: row;flex-wrap: wrap;">
         <div class="col-md-4 col-lg-3" ng-repeat="workout in $ctrl._workouts">
           <div class="thumbnail-box-wrapper">
-            <div class="thumbnail-box" >
+            <div class="thumbnail-box" style="max-height: 150px;" >
               <a class="thumb-link" ui-sref="app.workout({id: workout.id})" title="" ></a>
               <div class="thumb-content">
                 <div class="center-vertical">
@@ -31,12 +31,13 @@
               <div class="thumb-overlay bg-black"></div>
               <img class="lazy" ng-src="{{workout.cover.url}}" data-original="{{workout.cover.url}}" alt="" style="display: block;">
             </div>
-            <div class="thumb-pane">
+            <div class="thumb-pane" style="height: 180px;">
               <h3 class="thumb-heading animated rollIn">
                   <a ui-sref="app.workout({id: workout.id})" title="">
                       {{workout.title}}
                   </a>
-                  <small>{{workout.description}}</small>
+                  <small style="    height: 80px;overflow: scroll;">{{workout.description}}</small>
+                  <span ng-class="{'bs-label label-danger': workout.status == 'offline', 'bs-label label-success': workout.status == 'online'}" style="position: absolute;right: 10px;margin-top: 10px;">{{workout.status}}</span>
               </h3>
             </div>
           </div>

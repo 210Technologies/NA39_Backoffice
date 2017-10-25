@@ -35,7 +35,7 @@ class NewExerciseModalCtrl {
     }else if (this.step == 3){
         this.uploadCover()
     }else{
-      this.next_step += 1
+      this.fourthStep()
     }
   }
 
@@ -51,10 +51,14 @@ class NewExerciseModalCtrl {
   }
 
   fourthStep(){
+    this.next_step += 1
     this._Exercise.update(this._new_exercise).then(
       (res) => {
         this._load = false
         this.modalInstance.close(res)
+      },
+      (err) => {
+        this.next_step -= 1
       }
     )
   }

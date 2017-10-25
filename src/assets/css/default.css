@@ -3,6 +3,19 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
+.cancel-btn{
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 10px;
+  color: #C4C4C4;
+  width: 20px;
+  height: 20px;
+}
+
+.cancel-btn:hover{
+  background: #F1F1F1;
+}
 
 /*Textbox */
 .textbox-hover {

@@ -116,17 +116,19 @@ gulp.task('build', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fon
 });
 
 gulp.task('default', ['html', 'browserify','configuration', 'minify-css', 'image', 'scripts', 'fonts'], function() {
-  
-  // browserSync.init(['./build/**/**.**'], {
-  //   server: "./build",
-  //   port: process.env.PORT || 5000,
-  //   notify: false,
-  //   ui: {
-  //     port: 4001
-  //   }
-  // });
-  
-  // gulp.watch("src/index.html", ['html']);
-  // gulp.watch(viewFiles, ['views']);
-  // gulp.watch(jsFiles, ['browserify']);
+    if (env == 'local'){
+       browserSync.init(['./build/**/**.**'], {
+      }
+      server: "./build",
+      port: process.env.PORT || 5000,
+      notify: false,
+      ui: {
+        port: 4001
+      }
+    });
+    
+    gulp.watch("src/index.html", ['html']);
+    gulp.watch(viewFiles, ['views']);
+    gulp.watch(jsFiles, ['browserify']);
+  }
 });

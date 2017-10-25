@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <button type="button" class="close" ng-click="$ctrl.modalInstance.close($ctrl._exercise)">&times;</button>
+    <button type="button" class="close" ng-click="$ctrl.modalInstance.close($ctrl._exercise)" ng-disabled="$ctrl._load == true">&times;</button>
     <h4 class="modal-title">{{$ctrl._exercise.title}}</h4>
 </div>
 
@@ -55,9 +55,9 @@
 
         <div class="form-group">
             <div class="col-xs-10 col-xs-offset-1">
-                <div class="img-modal" ng-hide="$ctrl._src_uploader.queue[0]" >
+                <div class="img-modal" ng-hide="$ctrl._src_error == false" >
                     <div class="js input-file-container">
-                        <input class="input-file" type="file" uploader="$ctrl._src_uploader" nv-file-select></input>
+                        <input class="input-file" type="file" uploader="$ctrl._src_uploader" nv-file-select filters="videoFilter"></input>
                         <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
                           Choose video...
                         </label>
@@ -65,17 +65,14 @@
 
                 </div>
 
-                <div class="content-box" ng-show="$ctrl._src_uploader.queue[0]">
+                <div class="content-box" ng-repeat="item in $ctrl._src_uploader.queue" ng-show="item.alias == 'exercise[src]'">
+                    <div class="cancel-btn" ng-click="item.remove();$ctrl._src_error = undefined">&times</div>
                     <div class="content-box-wrapper">
-                        Name: <span ng-bind="$ctrl._src_uploader.queue[0].file.name"></span>
-                        <div class="progressbar" data-value="{{$ctrl._src_uploader.queue[0].progress}}">
-                            <div ng-class=" {'progressbar-value bg-blue': $ctrl._src_uploader.queue[0].progress < 100, 'progressbar-value bg-green': $ctrl._src_uploader.queue[0].progress == 100}" style="width: {{$ctrl._src_uploader.queue[0].progress}}%">
-                                <div class="progress-label">{{$ctrl._src_uploader.queue[0].progress}}%</div>
-                            </div>
-                        </div>
+                        Name: <span ng-bind="item.file.name"></span>
                     </div>
                 </div>
-                <div style="font-size: 10px; color: #C4C4C4">Uniquement des vidéos au format MP4.</div>
+                <div style="font-size: 10px; color: #C4C4C4" ng-show="!$ctrl._src_error">Uniquement des vidéos au format MP4.</div>
+                <div style="font-size: 15px; color: #cf4436" ng-show="$ctrl._src_error">Uniquement des vidéos au format MP4.</div>
                 
             </div>
             
@@ -84,40 +81,23 @@
 
         <div class="form-group">
             <div class="col-xs-10 col-xs-offset-1">
-            <div class="img-modal" ng-hide="$ctrl._src_uploader.queue[1]" >
+            <div class="img-modal" ng-hide="$ctrl._cover_error == false" >
               <div class="js input-file-container">
-                <input class="input-file" type="file" uploader="$ctrl._src_uploader" nv-file-select></input>
+                <input class="input-file" type="file" uploader="$ctrl._src_uploader" nv-file-select filters="imageFilter"></input>
                 <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
                   Choose cover...
                 </label>
               </div>
             </div>
-            <div class="content-box" ng-show="$ctrl._src_uploader.queue[1]">
-                <div class="content-box-wrapper">
-                    Name: <span ng-bind="$ctrl._src_uploader.queue[1].file.name"></span>
-                    <div class="progressbar" data-value="{{$ctrl._src_uploader.queue[1].progress}}">
-                        <div ng-class=" {'progressbar-value bg-blue': $ctrl._src_uploader.queue[1].progress < 100, 'progressbar-value bg-green': $ctrl._src_uploader.queue[1].progress == 100}" style="width: {{$ctrl._src_uploader.queue[1].progress}}%">
-                            <div class="progress-label">{{$ctrl._src_uploader.queue[1].progress}}%</div>
-                        </div>
+            <div class="content-box" ng-repeat="item in $ctrl._src_uploader.queue" ng-show="item.alias == 'exercise[cover]'">
+                    <div class="cancel-btn" ng-click="item.remove();$ctrl._cover_error = undefined">&times</div>
+                    <div class="content-box-wrapper">
+                        Name: <span ng-bind="item.file.name"></span>
                     </div>
-                </div>
-
-                <!-- <div class="button-pane">
-                    <button ng-click="$ctrl.uploadCover($ctrl._src_uploader.queue[1])" class="btn btn-success">
-                        <div class=" icon-typicons-export"> </div>
-                        Upload
-                    </button>
-                    <button ng-click="$ctrl._src_uploader.queue[1].cancel()" class="btn btn-warning" title="Stop">
-                        <div class=" icon-typicons-block"> </div>
-                        Stop
-                    </button>
-                    <button ng-click="$ctrl._src_uploader.queue[1].remove()" class="btn btn-danger" title="Supprimer">
-                        <div class=" icon-typicons-cancel"> </div>
-                        Cancel
-                    </button>
-
-                </div> -->
             </div>
+            
+            <div style="font-size: 10px; color: #C4C4C4" ng-show="!$ctrl._cover_error">Les format PNG, JPEG, JPG, et GIF sont supportés. Il est conseillé pour des raisons d'affichage de rajouter uniquement des photos en 1:1 ou 2:3.</div>
+            <div style="font-size: 15px; color: #cf4436" ng-show="$ctrl._cover_error">Les format PNG, JPEG, JPG, et GIF sont supportés. Il est conseillé pour des raisons d'affichage de rajouter uniquement des photos en 1:1 ou 2:3.</div>
         </div>
         </div>
     </form>
@@ -125,16 +105,14 @@
 
 
 <div class="modal-footer" ng-show="$ctrl._showEdit == false && $ctrl._load == false">
-    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.edit()">
-        <div class=" icon-linecons-pencil"> </div>
-        <!-- <i class="fa fa-edit"></i>  -->
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl._showEdit = true">
+    Edit
     </button>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.modalInstance.close($ctrl._exercise)">Close</button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.modalInstance.close($ctrl._exercise)" ng-disabled="$ctrl._load == true">Close</button>
 </div>
 
 <div class="modal-footer" ng-show="$ctrl._showEdit == true && $ctrl._load == false">
-    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.cancelEdit()">
-        <div class=" icon-typicons-cancel-outline"> </div>
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl._showEdit = false" ng-disabled="$ctrl._load == true">
         Cancel
     </button>
     <button type="button" class="btn btn-danger" ng-click="$ctrl.deleteExercise()">Delete</button>

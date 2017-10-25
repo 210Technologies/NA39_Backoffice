@@ -10,39 +10,51 @@
       </div>
       <div class="panel" >
             <div class="panel-body" style="text-align:center;">
-                <button class="btn btn-primary" ng-click="$ctrl.newVideoModal($ctrl.selected_cat)">
-                    <i class="glyph-icon icon-video-camera"></i>
-                    Nouvelle vidéo
+                <button class="btn btn-primary" ng-click="$ctrl.newStep()">
+                    <i class="glyph-icon icon-plus"></i>
+                    Ajouter étape
                 </button>
-                <button class="btn btn-default" ng-click="$ctrl.selected_cat.edit = true">
+                <button class="btn btn-default" ng-click="$ctrl.editWorkout()">
                     <i class="glyph-icon icon-pencil"></i>
-                    Editer Catégorie
+                    Editer workout
                 </button>
-                <button class="btn btn-danger" ng-click="$ctrl.deleteCat($ctrl.selected_cat)">
+                <button class="btn btn-danger" ng-click="$ctrl.deleteWorkout()">
                     <i class="glyph-icon icon-trash-o"></i>
-                    Supprimer Catégorie
+                    Supprimer workout
                 </button>
             </div>
         </div>
       <div class="row">
-        <div class="col-md-9">
-        <div class="blog-box row" ng-repeat="step in $ctrl._workout.steps">
-            <div class="post-image col-md-4">
-                <a href="" class="prettyphoto" rel="prettyPhoto[pp_gal]" title="Blog post title">
-                    <img class="img-responsive lazy img-rounded" ng-src="{{step.cover.url}}" data-original="../../assets/image-resources/stock-images/img-44.jpg" alt="" style="display: block;">
-                </a>
-            </div>
-            <div class="post-content-wrapper col-md-8">
-                <a class="post-title" href="#" title="">
-                    <h3>{{step.title}}</h3>
-                </a>
-                <div class="post-content">
-                    <p>{{step.description}}</p>
+        <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-body">
+                <h3 class="title-hero">
+                    Étape du workout
+                </h3>
+                <div class="example-box-wrapper">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Étape</th>
+                            <th>Repetition</th>
+                            <th>Break</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="step_workout in $ctrl._workout.step_workouts|orderBy:'rank'">
+                            <td>{{step_workout.rank}}</td>
+                            <td>{{step_workout.step.title}}</td>
+                            <td>{{step_workout.repetition}}</td>
+                            <td>{{step_workout.break_period}}</td>
+                            <td>{{step_workout.status}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <a ng-click="$ctrl.stepModal(step)" class="btn btn-sm btn-default" title="Read more">Edit</a>
             </div>
         </div>
-  
     </div>
     </div>
     </div>

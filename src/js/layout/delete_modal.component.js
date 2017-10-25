@@ -8,9 +8,11 @@ class DeleteModalCtrl {
       this._message = this.resolve.message;
     };
     this._AppConstants = AppConstants;
+    this._load = false
   }
 
   confirm(){
+    this._load = true
     this._service.delete(this._item).then(
       (res) => {
         this.modalInstance.close('ok')

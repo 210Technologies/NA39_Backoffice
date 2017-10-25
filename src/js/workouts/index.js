@@ -12,11 +12,13 @@ workoutsModule.config(workoutsConfig);
 import workoutsCtrl from './workouts.controller';
 workoutsModule.controller('WorkoutsCtrl', workoutsCtrl);
 
-import appWorkoutModal from './workout.controller';
-workoutsModule.controller('WorkoutCtrl', appWorkoutModal);
+import appWorkout from './workout.controller';
+workoutsModule.controller('WorkoutCtrl', appWorkout);
 
 import appNewWorkoutModal from './new_workout_modal.component';
 workoutsModule.component('appNewWorkoutModal', appNewWorkoutModal);
 
+import appWorkoutModal from './workout_modal.component';
+workoutsModule.component('appWorkoutModal', appWorkoutModal);
 
 export default workoutsModule;

@@ -22,7 +22,7 @@ export default class Step {
     }).then((res) => res.data);
   }
 
-  newStep(step){
+  save(step){
     return this._$http({ 
       url: this._AppConstants.api + '/admin/steps/',
       method: 'POST',

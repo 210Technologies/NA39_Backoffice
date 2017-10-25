@@ -12,5 +12,8 @@
         Cancel
         <!-- <i class="fa fa-edit"></i>  -->
     </button>
-    <button type="button" class="btn btn-danger" ng-click="$ctrl.confirm()">Confirm</button>
+    <button type="button" class="btn btn-danger" ng-click="$ctrl.confirm()"  ng-show="$ctrl._load == false">Confirm</button>
+    <button type="button" class="btn btn-danger" ng-show="$ctrl._load == true" >
+        <div class="remove-border glyph-icon tooltip-button icon-spin-6 icon-spin" ></div>
+    </button>
 </div>

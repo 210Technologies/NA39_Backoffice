@@ -13,8 +13,8 @@ class ExercisesCtrl {
   exerciseModal(exercise){
     let ctrl = this
       var modalInstance = this._$uibModal.open({
-                
                 component: 'appExerciseModal',
+                backdrop: 'static',
                 resolve:{
                     exercise: function() {
                       return exercise;
@@ -34,7 +34,8 @@ class ExercisesCtrl {
   newExerciseModal(){
     let ctrl = this._exercises
     var modalInstance = this._$uibModal.open({
-        component: 'appNewExerciseModal'
+        component: 'appNewExerciseModal',
+        backdrop: 'static'
    }).result.then(function (result) {
       ctrl.push(result)
     });

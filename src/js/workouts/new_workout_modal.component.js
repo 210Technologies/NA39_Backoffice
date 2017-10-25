@@ -13,24 +13,32 @@ class NewWorkoutModalCtrl {
   saveWorkout(){
     let ctrl = this
     var item = this._cover_uploader.queue[0]
-    item.url =  this._AppConstants.api + '/admin/workouts'
-    item.formData.push({'workout[title]': this._new_workout.title})
-    item.formData.push({'workout[description]': this._new_workout.description})
-    item.alias = 'workout[cover]'
-    item.method = 'POST'
-    
-    item.onProgress = function(progress){
-      item.progress = progress
-      if (progress == 100)
-        ctrl._load = true
+    if (item){
+      item.url =  this._AppConstants.api + '/admin/workouts'
+      item.formData.push({'workout[title]': this._new_workout.title})
+      item.formData.push({'workout[description]': this._new_workout.description})
+      item.formData.push({'workout[status]': this._new_workout.status})
+      item.alias = 'workout[cover]'
+      item.method = 'POST'
+      
+      item.onProgress = function(progress){
+        item.progress = progress
+        if (progress == 100)
+          ctrl._load = true
+      }
+      item.onComplete = function(response, video){
+        ctrl._load = false
+        ctrl.modalInstance.close(response)
+      }
+      item.upload()
+    }else{
+      this._Workout.newWorkout(this._new_workout).then(
+        (res) => {
+          this.modalInstance.close(res)
+          ctrl._load = false
+        }
+      )
     }
-    item.onComplete = function(response, video){
-      ctrl._load = false
-      ctrl._new_workout = response;
-      ctrl.modalInstance.close(response)
-    }
-    item.upload()
-    
   }
 }
 

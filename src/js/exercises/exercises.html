@@ -31,14 +31,13 @@
               <div class="thumb-overlay bg-black"></div>
               <img class="lazy" ng-src="{{exercise.cover.url}}" data-original="../../assets/image-resources/stock-images/img-20.jpg" alt="" style="display: block;">
             </div>
-            <div class="thumb-pane" style="height: 150px;">
+            <div class="thumb-pane" style="height: 180px;">
               <h3 class="thumb-heading animated rollIn">
                   <a ng-click="$ctrl.exerciseModal(exercise)" title="">
                       {{exercise.title}}
-                      {{exercise.id}}
                   </a>
-                  <small>{{exercise.description}}</small>
-                  <span ng-class="{'bs-label label-danger': exercise.status == 'offline', 'bs-label label-success': exercise.status == 'online'}" style="position: absolute;right: 10px;">{{exercise.status}}</span>
+                  <small style="    height: 80px;overflow: scroll;">{{exercise.description}}</small>
+                  <span ng-class="{'bs-label label-danger': exercise.status == 'offline', 'bs-label label-success': exercise.status == 'online'}" style="position: absolute;right: 10px;margin-top: 10px;">{{exercise.status}}</span>
               </h3>
             </div>
           </div>
