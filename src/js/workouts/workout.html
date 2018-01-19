@@ -10,10 +10,6 @@
       </div>
       <div class="panel" >
             <div class="panel-body" style="text-align:center;">
-                <button class="btn btn-primary" ng-click="$ctrl.newStep()">
-                    <i class="glyph-icon icon-plus"></i>
-                    Ajouter étape
-                </button>
                 <button class="btn btn-default" ng-click="$ctrl.editWorkout()">
                     <i class="glyph-icon icon-pencil"></i>
                     Editer workout
@@ -31,7 +27,7 @@
                 <h3 class="title-hero">
                     Étape du workout
                 </h3>
-                <div class="example-box-wrapper">
+                <div class="example-box-wrapper"  style="text-align:center;">
                     <table class="table">
                         <thead>
                         <tr>
@@ -40,18 +36,52 @@
                             <th>Repetition</th>
                             <th>Break</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="step_workout in $ctrl._workout.step_workouts|orderBy:'rank'">
-                            <td>{{step_workout.rank}}</td>
-                            <td>{{step_workout.step.title}}</td>
-                            <td>{{step_workout.repetition}}</td>
-                            <td>{{step_workout.break_period}}</td>
-                            <td>{{step_workout.status}}</td>
+                                <td ng-show="!step_workout.edit">{{step_workout.rank}}</td>
+                                <td ng-show="!step_workout.edit">{{step_workout.step.title}}</td>
+                                <td ng-show="!step_workout.edit">{{step_workout.repetition}}</td>
+                                <td ng-show="!step_workout.edit">{{step_workout.break_period}}</td>
+                                <td ng-show="!step_workout.edit"><span ng-class="{'bs-label label-success': step_workout.status == 'online', 'bs-label label-danger': step_workout.status == 'offline'}">{{step_workout.status}}</span></td>
+                                <td ng-show="!step_workout.edit">
+                                    <button class="btn btn-default" ng-click="step_workout.edit = true">Edit</button>
+                                    <button class="btn btn-danger" ng-click="$ctrl.deleteStepWorkout(step_workout)">Delete</button>
+                                </td>
+
+                                <td ng-show="step_workout.edit"><input type="number" name="" style="width: 50px" ng-model="step_workout.rank"></td>
+                                <td ng-show="step_workout.edit"><select style="width: 200px" ng-model="step_workout.step_id">
+                                    <option ng-repeat="step in $ctrl._steps" value="{{step.id}}">{{step.title}}</option>
+                                </select></td>
+                                <td ng-show="step_workout.edit"><input type="number" name="" style="width: 50px" ng-model="step_workout.repetition"></td>
+                                <td ng-show="step_workout.edit"><input type="number" name="" style="width: 50px" ng-model="step_workout.break_period"></td>
+                                <td ng-show="step_workout.edit"><select style="width: 100px" ng-model="step_workout.status">
+                                    <option value="online">online</option>
+                                    <option value="offline">offline</option>
+                                </select></td>
+                                <td ng-show="step_workout.edit"><button class="btn btn-default" ng-click="step_workout.edit = false">Cancel</button><button class="btn btn-success" ng-click="$ctrl.updateStepWorkout(step_workout)">Save</button></td>
+                        </tr>
+                        <tr ng-show="$ctrl._new_step_workout.new">
+                            <td><input type="number" name="" style="width: 50px" ng-model="$ctrl._new_step_workout.rank"></td>
+                            <td><select style="width: 200px" ng-model="$ctrl._new_step_workout.step_id">
+                                <option ng-repeat="step in $ctrl._steps" value="{{step.id}}">{{step.title}}</option>
+                            </select></td>
+                            <td><input type="number" name="" style="width: 50px" ng-model="$ctrl._new_step_workout.repetition"></td>
+                            <td><input type="number" name="" style="width: 50px" ng-model="$ctrl._new_step_workout.break_period"></td>
+                            <td><select style="width: 100px" ng-model="$ctrl._new_step_workout.status">
+                                <option value="online">online</option>
+                                <option value="offline">offline</option>
+                            </select></td>
+                            <td><button class="btn btn-default" ng-click="$ctrl._new_step_workout.new = false">Cancel</button><button class="btn btn-success" ng-click="$ctrl.saveStepWorkout()">Save</button></td>
                         </tr>
                         </tbody>
                     </table>
+                    <button class="btn btn-primary" ng-click="$ctrl._new_step_workout.new = true" ng-show="!$ctrl._new_step_workout.new">
+                        <i class="glyph-icon icon-plus"></i>
+                        Ajouter une étape
+                    </button>
                 </div>
             </div>
         </div>

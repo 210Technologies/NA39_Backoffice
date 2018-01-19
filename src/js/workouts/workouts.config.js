@@ -35,6 +35,12 @@ function WorkoutsConfig($stateProvider) {
           (profile) => profile,
           (err) => $state.go('app.home')
         );
+      },
+      steps: function(Step, $state) {
+        return Step.all().then(
+          (profile) => profile,
+          (err) => $state.go('app.home')
+        );
       }
     }
   });

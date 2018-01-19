@@ -124,6 +124,19 @@ app.directive('ngThumb', ['$window', function($window) {
             }
         };
     }])
+app.directive('checkImage', function($http) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            attrs.$observe('ngSrc', function(ngSrc) {
+                $http({ url: ngSrc, type: "HEAD" }).then(
+                  (res) => console.log("ok"),
+                  (err) => element.attr('src', 'styles/no-image.jpg')
+                );
+            });
+        }
+    };
+});
 angular.bootstrap(document, ['app'], {
   strictDi: true
 });

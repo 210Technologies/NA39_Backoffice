@@ -32,8 +32,11 @@
                   <form ng-submit="$ctrl.submitCat()" class="form-horizontal bordered-row">
                     <div class="form-group">
                         <label class="col-sm-3 control-label"></label>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <input type="text" class="form-control" id="" placeholder="Nom" ng-model="$ctrl._new_category_photo.name">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="" placeholder="Rang" ng-model="$ctrl._new_category_photo.rank">
                         </div>
                     </div>
                  </form>
@@ -65,8 +68,7 @@
       <div class="portfolio-controls mrg10L mrg10R radius-all-4 portfolio-nav-alt bg-blue clearfix controls">
           <div class="container text-center">
               <ul class="float-none">
-                  <li ng-class="{'filter active': $ctrl._selected_cat == undefined, 'filter': $ctrl._selected_cat != undefined}" ng-click="$ctrl._selected_cat = undefined">View all </li>
-                  <li ng-repeat= "category in $ctrl._category_photos" ng-class="{'filter active': $ctrl._selected_cat == category, 'filter': $ctrl._selected_cat != category}" ng-click="$ctrl._selected_cat = category">{{category.name}}</li>
+                  <li ng-repeat= "category in $ctrl._category_photos|orderBy:'rank'" ng-class="{'filter active': $ctrl._selected_cat == category, 'filter': $ctrl._selected_cat != category}" ng-click="$ctrl._selected_cat = category">{{category.name}}</li>
               </ul>
           </div>
       </div> 
@@ -105,8 +107,11 @@
                   <form ng-submit="$ctrl.submitCat()" class="form-horizontal bordered-row">
                     <div class="form-group">
                         <label class="col-sm-3 control-label"></label>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <input type="text" class="form-control" id="" placeholder="Nom" ng-model="$ctrl._selected_cat.name">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="" placeholder="Rang" ng-model="$ctrl._selected_cat.rank">
                         </div>
                     </div>
                  </form>

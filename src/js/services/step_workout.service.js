@@ -1,4 +1,4 @@
-export default class Step {
+export default class StepWorkout {
   constructor(AppConstants, $http) {
     'ngInject';
 
@@ -9,14 +9,14 @@ export default class Step {
 
   all() {
     return this._$http({ 
-      url: this._AppConstants.api + '/admin/steps/',
+      url: this._AppConstants.api + '/admin/step_workouts/',
       method: 'GET'
     }).then((res) => res.data);
   }
 
   update(step){
     return this._$http({
-      url: this._AppConstants.api + '/admin/steps/' + step.id,
+      url: this._AppConstants.api + '/admin/step_workouts/' + step.id,
       method: 'PUT',
       data: step
     }).then((res) => res.data);
@@ -24,7 +24,7 @@ export default class Step {
 
   save(step){
     return this._$http({ 
-      url: this._AppConstants.api + '/admin/steps/',
+      url: this._AppConstants.api + '/admin/step_workouts/',
       method: 'POST',
       data: step
     }).then((res) => res.data);
@@ -32,7 +32,7 @@ export default class Step {
 
   delete(step){
     return this._$http({
-      url: this._AppConstants.api + '/admin/steps/' + step.id,
+      url: this._AppConstants.api + '/admin/step_workouts/' + step.id,
       method: 'DELETE'
     }).then((res) => res.data);
   }

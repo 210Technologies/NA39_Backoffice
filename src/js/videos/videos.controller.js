@@ -3,7 +3,8 @@ class VideosCtrl {
     'ngInject';
     this._CategoryVideo = CategoryVideo
     this._videos = videos
-    this._category_videos = category_videos
+    this._category_videos = $filter('orderBy')(category_videos, 'rank' )
+    this.selected_cat = this._category_videos[0]
     this._Video = Video
     this.$_filter = $filter
     this._$uibModal = $uibModal
@@ -11,7 +12,7 @@ class VideosCtrl {
     this._new_category_video = {}
     // Bind is req'd because the logout method assumes
     // the execution context is within the User object.
-    // this.logout = User.logout.bind(User); 
+    // this.logout = User.logout.bind(User);
   }
 
   videoModal(video){
@@ -26,7 +27,7 @@ class VideosCtrl {
                 
            })
     modalInstance.result.then(function (result) {
-      ctrl._videos[ctrl._videos.indexOf(video)] = result
+      ctrl._videos[ctrl._videos.indexOf(video)] = result;
     });
   }
 
@@ -52,6 +53,9 @@ class VideosCtrl {
   newVideoModal(category){
     let ctrl = this._videos
     var modalInstance = this._$uibModal.open({
+        backdrop: 'static',
+        keyboard: false,
+        
         component: 'appNewVideoModal',
         resolve:{
             category: function() {

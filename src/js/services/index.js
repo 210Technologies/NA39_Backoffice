@@ -37,6 +37,9 @@ servicesModule.service('Workout', WorkoutService);
 import StepService from './step.service';
 servicesModule.service('Step', StepService);
 
+import StepWorkoutService from './step_workout.service';
+servicesModule.service('StepWorkout', StepWorkoutService);
+
 import ChallengeService from './challenge.service';
 servicesModule.service('Challenge', ChallengeService);
 

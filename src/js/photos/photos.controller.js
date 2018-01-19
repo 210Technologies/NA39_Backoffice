@@ -3,7 +3,8 @@ class PhotosCtrl {
     'ngInject';
     this._$state = $state;
     this._photos = photos
-    this._category_photos = category_photos
+    this._category_photos = $filter('orderBy')(category_photos, 'rank' )
+    this._selected_cat = this._category_photos[0]
     this._Photo = Photo
     this._CategoryPhoto = CategoryPhoto
     this._$uibModal = $uibModal
@@ -11,6 +12,7 @@ class PhotosCtrl {
     this._new_category_photo = {}
     this.$_filter = $filter
   }
+  
   photoModal(photo){
     let ctrl = this
       var modalInstance = this._$uibModal.open({
