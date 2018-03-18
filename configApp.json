@@ -5,14 +5,21 @@
       "AppConstants": {
         "api": "http://localhost:3000/",
         "jwtKey": "jwtToken",
-        "appName": "Conduit"
+        "appName": "NA39"
+      }
+    },
+    "staging": {
+      "AppConstants": {
+        "api": "https://staging-na39api.herokuapp.com",
+        "jwtKey": "jwtToken",
+        "appName": "NA39"
       }
     },
     "production": {
       "AppConstants": {
         "api": "https://na39api.herokuapp.com",
         "jwtKey": "jwtToken",
-        "appName": "Conduit"
+        "appName": "NA39"
       }
     }
   }
