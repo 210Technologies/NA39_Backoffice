@@ -15,6 +15,7 @@
         "appName": "NA39"
       }
     },
+    
     "production": {
       "AppConstants": {
         "api": "https://na39api.herokuapp.com",
