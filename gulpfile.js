@@ -132,9 +132,5 @@ gulp.task('default', ['html', 'browserify','configuration', 'minify-css', 'image
   }
 });
 
-gulp.task('heroku:staging', ['html', 'browserify','configuration', 'minify-css', 'image', 'scripts', 'fonts'], function() {
-    gulp.watch("src/index.html", ['html']);
-    gulp.watch(viewFiles, ['views']);
-    gulp.watch(jsFiles, ['browserify']);
-  }
+gulp.task('heroku:staging', ['default'], function() {
 });
