@@ -1,12 +1,12 @@
 <div id="page-content-wrapper">
-  <div id="page-content">            
+  <div id="page-content">
     <div class="container">
 
 
       <div id="page-title">
         <h2>{{$ctrl._workout.title}}</h2>
         <p>{{$ctrl._workout.description}}</p>
-        
+
       </div>
       <div class="panel" >
             <div class="panel-body" style="text-align:center;">
@@ -33,9 +33,11 @@
                         <tr>
                             <th>#</th>
                             <th>Étape</th>
+                            <th>Durée (en secondes)</th>
                             <th>Repetition</th>
                             <th>Break</th>
                             <th>Status</th>
+                            <th>Minuteur</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -43,25 +45,36 @@
                         <tr ng-repeat="step_workout in $ctrl._workout.step_workouts|orderBy:'rank'">
                                 <td ng-show="!step_workout.edit">{{step_workout.rank}}</td>
                                 <td ng-show="!step_workout.edit">{{step_workout.step.title}}</td>
+                                <td ng-show="!step_workout.edit">{{step_workout.duration}}</td>
                                 <td ng-show="!step_workout.edit">{{step_workout.repetition}}</td>
                                 <td ng-show="!step_workout.edit">{{step_workout.break_period}}</td>
                                 <td ng-show="!step_workout.edit"><span ng-class="{'bs-label label-success': step_workout.status == 'online', 'bs-label label-danger': step_workout.status == 'offline'}">{{step_workout.status}}</span></td>
-                                <td ng-show="!step_workout.edit">
-                                    <button class="btn btn-default" ng-click="step_workout.edit = true">Edit</button>
-                                    <button class="btn btn-danger" ng-click="$ctrl.deleteStepWorkout(step_workout)">Delete</button>
-                                </td>
 
                                 <td ng-show="step_workout.edit"><input type="number" name="" style="width: 50px" ng-model="step_workout.rank"></td>
-                                <td ng-show="step_workout.edit"><select style="width: 200px" ng-model="step_workout.step_id">
-                                    <option ng-repeat="step in $ctrl._steps" value="{{step.id}}">{{step.title}}</option>
-                                </select></td>
+                                <td ng-show="step_workout.edit">
+                                  <select style="width: 200px" ng-model="step_workout.step_id" ng-options="step.id as step.title for step in $ctrl._steps" ng-init="step_workout.step_id = step_workout.step_id">
+                                    <!-- <option  value="{{step.id}}">{{step.title}}</option> -->
+                                  </select>
+                                </td>
+                                <td ng-show="step_workout.edit"><input type="number" name="" style="width: 50px" ng-model="step_workout.duration"></td>
                                 <td ng-show="step_workout.edit"><input type="number" name="" style="width: 50px" ng-model="step_workout.repetition"></td>
                                 <td ng-show="step_workout.edit"><input type="number" name="" style="width: 50px" ng-model="step_workout.break_period"></td>
                                 <td ng-show="step_workout.edit"><select style="width: 100px" ng-model="step_workout.status">
                                     <option value="online">online</option>
                                     <option value="offline">offline</option>
                                 </select></td>
-                                <td ng-show="step_workout.edit"><button class="btn btn-default" ng-click="step_workout.edit = false">Cancel</button><button class="btn btn-success" ng-click="$ctrl.updateStepWorkout(step_workout)">Save</button></td>
+                                <td>
+                                    <input type="checkbox" ng-model="step_workout.timed_step" ng-disabled="!step_workout.edit">
+                                </td>
+                                <td ng-show="!step_workout.edit">
+                                    <button class="btn btn-default" ng-click="step_workout.edit = true">Edit</button>
+                                    <button class="btn btn-danger" ng-click="$ctrl.deleteStepWorkout(step_workout)">Delete</button>
+                                </td>
+
+                                <td ng-show="step_workout.edit">
+                                  <button class="btn btn-default" ng-click="step_workout.edit = false">Cancel</button>
+                                  <button class="btn btn-success" ng-click="$ctrl.updateStepWorkout(step_workout)">Save</button>
+                                </td>
                         </tr>
                         <tr ng-show="$ctrl._new_step_workout.new">
                             <td><input type="number" name="" style="width: 50px" ng-model="$ctrl._new_step_workout.rank"></td>
@@ -90,4 +103,3 @@
     </div>
   </div>
 </div>
-
