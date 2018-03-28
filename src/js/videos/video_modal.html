@@ -1,156 +1,159 @@
-<div class="modal-header">
-    <button type="button" class="close" ng-click="$ctrl.modalInstance.close($ctrl._video)">&times;</button>
-    <h4 class="modal-title">{{$ctrl._video.title}}</h4>
-</div>
+<div class="relative" style:'position:relative'>
+  <div class="loading-wrapper" ng-show="$ctrl.load_save">
+    <i class="remove-border glyph-icon demo-icon tooltip-button icon-spin-6 icon-spin" ></i>
+  </div>
+  <div class="modal-header">
+      <button type="button" class="close" ng-click="$ctrl.modalInstance.close($ctrl._video)" ng-disabled= "$ctrl._uploadInProgress">&times;</button>
+      <h4 class="modal-title">{{$ctrl._video.title}}</h4>
+  </div>
 
 
-<div class="modal-body" ng-show="$ctrl._showEdit == false">
-    <div class="content-box">
-        <div class="content-box-wrapper bg-gray">{{$ctrl._video.description}}</div>
-    </div>
-    <div nb-click="$ctrl.edit">
-        <video style="width: 100%;height: 400px;" controls>
-          <source ng-src="{{$ctrl._video.src.url}}" type="video/mp4">
-          <source ng-src="{{$ctrl._video.src.url}}" type="video/quicktime">
-          Your browser does not support HTML5 video.
-        </video>
-    </div>
-</div>
+  <div class="modal-body" ng-show="$ctrl._showEdit == false">
+      <div class="content-box">
+          <div class="content-box-wrapper bg-gray">{{$ctrl._video.description}}</div>
+      </div>
+      <div>
+          <video style="width: 100%;height: 400px;" controls check-poster poster="{{$ctrl._video.cover.url}}">
+            <source ng-src="{{$ctrl._video.src}}" type="video/mp4">
+            <source ng-src="{{$ctrl._video.src}}" type="video/quicktime">
+            Your browser does not support HTML5 video.
+          </video>
+      </div>
+  </div>
 
-<div class="modal-body" ng-show="$ctrl._showEdit == true">
-    <h3 class="title-hero">
-        Edit video
-    </h3>
-    <form class="form-horizontal bordered-row">
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Title</label>
-            <div class="col-sm-8 ">
-                <input type="text" class="form-control" id="" placeholder="Titre" ng-model="$ctrl._video.title">
-            </div>
-        </div>
+  <div class="modal-body" ng-show="$ctrl._showEdit == true">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Sub Title</label>
-            <div class="col-sm-8 ">
-                <input type="text" class="form-control" id="" placeholder="Titre" ng-model="$ctrl._video.sub_title">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Description</label>
-            <div class="col-sm-8">
-                <textarea name="" id="" class="form-control" ng-model="$ctrl._video.description"></textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">Status</label>
-            <div class="col-sm-6">
-                <label class="radio-inline">
-                    <input type="radio" id=""  value="online" ng-model="$ctrl._video.status">
-                    Online
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" id=""  value="offline" ng-model="$ctrl._video.status">
-                    Offline
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-xs-10 col-xs-offset-1">
-                <div class="img-modal" ng-hide="$ctrl._video_uploader.queue[0]" >
-                    <div class="js input-file-container">
-                        <input class="input-file" type="file" uploader="$ctrl._video_uploader" nv-file-select></input>
-                        <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
-                          Choose video...
-                        </label>
-                    </div>
-                </div>
-
-                <div class="content-box" ng-repeat="item in $ctrl._video_uploader.queue">
-                    <div class="content-box-wrapper">
-                        Name: <span ng-bind="item.file.name"></span>
-                        <div class="progressbar" data-value="{{item.progress}}">
-                            <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
-                                <div class="progress-label">{{item.progress}}%</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="button-pane">
-                        <button ng-click="$ctrl.uploadVideo(item)" class="btn btn-success">
-                            <div class=" icon-typicons-export"> </div>
-                            Upload
-                        </button>
-                        <button ng-click="item.cancel()" class="btn btn-warning" title="Stop">
-                            <div class=" icon-typicons-block"> </div>
-                            Stop
-                        </button>
-                        <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer">
-                            <div class=" icon-typicons-cancel"> </div>
-                            Cancel
-                        </button>
-
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-xs-10 col-xs-offset-1">
-            <div class="img-modal" ng-hide="$ctrl._cover_uploader.queue[0]" >
-              <div class="js input-file-container">
-                <input class="input-file" type="file" uploader="$ctrl._cover_uploader" nv-file-select></input>
-                <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
-                  Choose cover...
-                </label>
+      <h3 class="title-hero">
+          Edit video
+      </h3>
+      <form class="form-horizontal bordered-row">
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Title</label>
+              <div class="col-sm-8 ">
+                  <input type="text" class="form-control" id="" placeholder="Titre" ng-model="$ctrl._video.title">
               </div>
-            </div>
-            <div class="content-box" ng-repeat="item in $ctrl._cover_uploader.queue">
-                <div class="content-box-wrapper">
-                    Name: <span ng-bind="item.file.name"></span>
-                    <div class="progressbar" data-value="{{item.progress}}">
-                        <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
-                            <div class="progress-label">{{item.progress}}%</div>
-                        </div>
-                    </div>
+          </div>
+
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Sub Title</label>
+              <div class="col-sm-8 ">
+                  <input type="text" class="form-control" id="" placeholder="Titre" ng-model="$ctrl._video.sub_title">
+              </div>
+          </div>
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Description</label>
+              <div class="col-sm-8">
+                  <textarea name="" id="" class="form-control" ng-model="$ctrl._video.description"></textarea>
+              </div>
+          </div>
+          <div class="form-group">
+              <label class="col-sm-3 control-label">Status</label>
+              <div class="col-sm-6">
+                  <label class="radio-inline">
+                      <input type="radio" id=""  value="online" ng-model="$ctrl._video.status">
+                      Online
+                  </label>
+                  <label class="radio-inline">
+                      <input type="radio" id=""  value="offline" ng-model="$ctrl._video.status">
+                      Offline
+                  </label>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                  <div class="img-modal" ng-hide="$ctrl._video_uploader.queue[0]" >
+                      <div class="js input-file-container">
+                          <input class="input-file" type="file" uploader="$ctrl._video_uploader" nv-file-select  ng-disabled= "$ctrl._uploadInProgress"></input>
+                          <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
+                            Choose video...
+                          </label>
+                      </div>
+                  </div>
+
+                  <div class="content-box" ng-repeat="item in $ctrl._video_uploader.queue">
+                      <div class="content-box-wrapper">
+                          Name: <span ng-bind="item.file.name"></span>
+                          <div class="progressbar" data-value="{{item.progress}}">
+                              <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
+                                  <div class="progress-label">{{item.progress}}%</div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="button-pane">
+                          <button ng-click="$ctrl.uploadVideo(item)" class="btn btn-success" ng-disabled= "$ctrl._uploadInProgress">
+                              <div class=" icon-typicons-export"> </div>
+                              Upload
+                          </button>
+                          <button ng-click="item.cancel()" class="btn btn-warning" title="Stop" ng-disabled= "!$ctrl._uploadInProgress">
+                              <div class=" icon-typicons-block"> </div>
+                              Stop
+                          </button>
+                          <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer" ng-disabled= "!$ctrl._uploadInProgress">
+                              <div class=" icon-typicons-cancel"> </div>
+                              Cancel
+                          </button>
+
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+
+          <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+              <div class="img-modal" ng-hide="$ctrl._cover_uploader.queue[0]" >
+                <div class="js input-file-container">
+                  <input class="input-file" type="file" uploader="$ctrl._cover_uploader" nv-file-select  ng-disabled= "$ctrl._uploadInProgress"></input>
+                  <label class="input-file-trigger" for="my-file{{$index + 1 %> %>" tabindex="0">
+                    Choose cover...
+                  </label>
                 </div>
+              </div>
+              <div class="content-box" ng-repeat="item in $ctrl._cover_uploader.queue">
+                  <div class="content-box-wrapper">
+                      Name: <span ng-bind="item.file.name"></span>
+                      <div class="progressbar" data-value="{{item.progress}}">
+                          <div ng-class=" {'progressbar-value bg-blue': item.progress < 100, 'progressbar-value bg-green': item.progress == 100}" style="width: {{item.progress}}%">
+                              <div class="progress-label">{{item.progress}}%</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="button-pane">
+                      <button ng-click="$ctrl.uploadCover(item)" class="btn btn-success" ng-disabled= "$ctrl._uploadInProgress">
+                          <div class=" icon-typicons-export"> </div>
+                          Upload
+                      </button>
+                      <button ng-click="item.cancel()" class="btn btn-warning" title="Stop" ng-disabled= "!$ctrl._uploadInProgress">
+                          <div class=" icon-typicons-block"> </div>
+                          Stop
+                      </button>
+                      <button ng-click="item.remove();" class="btn btn-danger" title="Supprimer" ng-disabled= "!$ctrl._uploadInProgress">
+                          <div class=" icon-typicons-cancel"> </div>
+                          Cancel
+                      </button>
 
-                <div class="button-pane">
-                    <button ng-click="$ctrl.uploadCover(item)" class="btn btn-success">
-                        <div class=" icon-typicons-export"> </div>
-                        Upload
-                    </button>
-                    <button ng-click="item.cancel()" class="btn btn-warning" title="Stop">
-                        <div class=" icon-typicons-block"> </div>
-                        Stop
-                    </button>
-                    <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer">
-                        <div class=" icon-typicons-cancel"> </div>
-                        Cancel
-                    </button>
-
-                </div>
-            </div>
-        </div>
-        </div>
-    </form>
-</div>
+                  </div>
+              </div>
+          </div>
+          </div>
+      </form>
+  </div>
 
 
-<div class="modal-footer" ng-show="$ctrl._showEdit == false">
-    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.edit()">
-        <div class=" icon-linecons-pencil"> </div>
-    </button>
-    <button type="button" class="btn btn-danger" ng-click="$ctrl.deleteVideo()">Delete</button>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.close()">Close</button>
-</div>
+  <div class="modal-footer" ng-show="$ctrl._showEdit == false">
+      <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl._showEdit = true">
+          Edit
+      </button>
+      <button type="button" class="btn btn-primary" ng-click="$ctrl.close()">Close</button>
+  </div>
 
-<div class="modal-footer" ng-show="$ctrl._showEdit == true">
-    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.cancelEdit()">
-        <div class=" icon-typicons-cancel-outline"> </div>
-        <!-- <i class="fa fa-edit"></i>  -->
-    </button>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.saveVideo()">Save</button>
+  <div class="modal-footer" ng-show="$ctrl._showEdit == true">
+    <button type="button" class="btn btn-default" ng-click="$ctrl._showEdit = false" ng-disabled= "$ctrl._uploadInProgress"> Cancel</button>
+    <button type="button" class="btn btn-danger" ng-click="$ctrl.deleteVideo()" ng-disabled= "$ctrl._uploadInProgress">Delete</button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.saveVideo()" ng-disabled= "$ctrl._uploadInProgress">Save</button>
+  </div>
+
 </div>

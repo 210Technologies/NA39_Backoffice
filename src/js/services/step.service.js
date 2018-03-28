@@ -8,7 +8,7 @@ export default class Step {
   }
 
   all() {
-    return this._$http({ 
+    return this._$http({
       url: this._AppConstants.api + '/admin/steps/',
       method: 'GET'
     }).then((res) => res.data);
@@ -23,7 +23,7 @@ export default class Step {
   }
 
   save(step){
-    return this._$http({ 
+    return this._$http({
       url: this._AppConstants.api + '/admin/steps/',
       method: 'POST',
       data: step
@@ -35,6 +35,22 @@ export default class Step {
       url: this._AppConstants.api + '/admin/steps/' + step.id,
       method: 'DELETE'
     }).then((res) => res.data);
+  }
+
+  new(){
+    return this._$http({
+      url:
+      this._AppConstants.api + '/admin/steps/new',
+      method: "GET"
+    }).then((res) => res.data)
+  }
+
+  edit(step){
+    return this._$http({
+      url:
+      this._AppConstants.api + '/admin/steps/' + step.id + '/edit',
+      method: "GET"
+    }).then((res) => res.data)
   }
 
 }

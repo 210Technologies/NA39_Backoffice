@@ -65,9 +65,9 @@ app.directive('mixitup',function(){
             element.mixitup();
             // how to tell mixitup to reload the data
         });
-         
+
     };
-    
+
     return {
         restrict:'A',
         link: linker,
@@ -130,8 +130,21 @@ app.directive('checkImage', function($http) {
         link: function(scope, element, attrs) {
             attrs.$observe('ngSrc', function(ngSrc) {
                 $http({ url: ngSrc, type: "HEAD" }).then(
-                  (res) => console.log("ok"),
+                  (res) => res,
                   (err) => element.attr('src', 'styles/no-image.jpg')
+                );
+            });
+        }
+    };
+});
+app.directive('checkPoster', function($http) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            attrs.$observe('poster', function(poster) {
+                $http({ url: poster, type: "HEAD" }).then(
+                  (res) => res,
+                  (err) => element.attr('poster', 'styles/no-image.jpg')
                 );
             });
         }

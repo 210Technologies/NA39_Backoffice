@@ -15,8 +15,5 @@ exercisesModule.controller('ExercisesCtrl', exercisesCtrl);
 import appExerciseModal from './exercise_modal.component';
 exercisesModule.component('appExerciseModal', appExerciseModal);
 
-import appNewExerciseModal from './new_exercise_modal.component';
-exercisesModule.component('appNewExerciseModal', appNewExerciseModal);
-
 
 export default exercisesModule;

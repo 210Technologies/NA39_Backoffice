@@ -15,8 +15,6 @@ videosModule.controller('VideosCtrl', VideosCtrl);
 import appVideoModal from './video_modal.component';
 videosModule.component('appVideoModal', appVideoModal);
 
-import appNewVideoModal from './new_video_modal.component';
-videosModule.component('appNewVideoModal', appNewVideoModal);
 
 
 export default videosModule;

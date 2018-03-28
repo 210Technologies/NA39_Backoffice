@@ -7,7 +7,7 @@ export default class Exercise {
   }
 
   all() {
-    return this._$http({ 
+    return this._$http({
       url: this._AppConstants.api + '/admin/exercises/',
       method: 'GET'
     }).then((res) => res.data);
@@ -15,14 +15,14 @@ export default class Exercise {
 
   update(exercise){
     return this._$http({
-      url: this._AppConstants.api + '/admin/exercises/' + exercise.id+ '/update_exercise',
+      url: this._AppConstants.api + '/admin/exercises/' + exercise.id,
       method: 'POST',
       data: exercise
     }).then((res) => res.data);
   }
 
   save(exercise){
-    return this._$http({ 
+    return this._$http({
       url: this._AppConstants.api + '/admin/exercises/',
       method: 'POST',
       data: exercise
@@ -30,7 +30,7 @@ export default class Exercise {
   }
 
   update(exercise){
-    return this._$http({ 
+    return this._$http({
       url: this._AppConstants.api + '/admin/exercises/' + exercise.id,
       method: 'PUT',
       data: exercise
@@ -38,18 +38,26 @@ export default class Exercise {
   }
 
   delete(exercise){
-    return this._$http({ 
+    return this._$http({
       url: this._AppConstants.api + '/admin/exercises/' + exercise.id,
       method: 'DELETE'
     }).then((res) => res.data);
   }
-  // Retrieve a user's profile
-  // get() {
-  //   return this._$http({ 
-  //     url: this._AppConstants.api + '/profiles/' + username,
-  //     method: 'GET'
-  //   }).then((res) => res.data.profile);
-  // }
 
+  new(){
+    return this._$http({
+      url:
+      this._AppConstants.api + '/admin/exercises/new',
+      method: "GET"
+    }).then((res) => res.data)
+  }
+
+  edit(exercise){
+    return this._$http({
+      url:
+      this._AppConstants.api + '/admin/exercises/' + exercise.id + '/edit',
+      method: "GET"
+    }).then((res) => res.data)
+  }
 
 }

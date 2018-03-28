@@ -10,25 +10,29 @@ class VideosCtrl {
     this._$uibModal = $uibModal
     this._newCat = false;
     this._new_category_video = {}
-    // Bind is req'd because the logout method assumes
-    // the execution context is within the User object.
-    // this.logout = User.logout.bind(User);
   }
 
   videoModal(video){
     let ctrl = this
-      var modalInstance = this._$uibModal.open({
-                component: 'appVideoModal',
-                resolve:{
-                    video: function() {
-                      return video;
-                    }
-                }
-                
-           })
-    modalInstance.result.then(function (result) {
-      ctrl._videos[ctrl._videos.indexOf(video)] = result;
-    });
+    this._Video.edit(video).then(
+      (res) => {
+        var modalInstance = this._$uibModal.open({
+          component: 'appVideoModal',
+          backdrop: 'static',
+          resolve:{
+              video: function() {
+                return video;
+              },
+              s3_url: function(){
+                return res;
+              }
+          }
+        })
+        modalInstance.result.then(function (result) {
+          ctrl._videos[ctrl._videos.indexOf(video)] = result;
+        });
+      }
+    )
   }
 
   submitCat(){
@@ -52,20 +56,30 @@ class VideosCtrl {
 
   newVideoModal(category){
     let ctrl = this._videos
-    var modalInstance = this._$uibModal.open({
-        backdrop: 'static',
-        keyboard: false,
-        
-        component: 'appNewVideoModal',
-        resolve:{
-            category: function() {
-              return category;
-            }
-        }
-        
-   }).result.then(function (result) {
-      ctrl.push(result)
-    });
+    this._Video.new().then(
+      (res) => {
+        var modalInstance = this._$uibModal.open({
+              component: 'appNewInstanceModal',
+              backdrop: 'static',
+              resolve:{
+                category: function() {
+                  return category;
+                },s3_url: function(){
+                    return res;
+                  },
+                  service: function(){
+                    return ctrl._Step;
+                  },
+                  item_name: function(){
+                    return 'step';
+                  }
+              }
+          }).result.then(function (result) {
+            ctrl.push(result)
+          });
+      }
+    )
+
   }
 
   deleteCat(category){
@@ -92,7 +106,7 @@ class VideosCtrl {
           ctrl._videos.splice(ctrl._videos.indexOf(videos[i]),1);
         ctrl.selected_cat = ctrl._category_videos[ctrl._category_videos.length - 1]
       }
-      
+
     });
   }
 

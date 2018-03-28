@@ -8,7 +8,7 @@ export default class Video {
   }
 
   all() {
-    return this._$http({ 
+    return this._$http({
       url: this._AppConstants.api + '/admin/videos/',
       method: 'GET'
     }).then((res) => res.data);
@@ -16,14 +16,14 @@ export default class Video {
 
   update(video){
     return this._$http({
-      url: this._AppConstants.api + '/admin/videos/' + video.id+ '/update_video',
-      method: 'POST',
+      url: this._AppConstants.api + '/admin/videos/' + video.id,
+      method: 'PUT',
       data: video
     }).then((res) => res.data);
   }
 
   newVideo(video){
-    return this._$http({ 
+    return this._$http({
       url: this._AppConstants.api + '/admin/videos/',
       method: 'POST',
       data: video
@@ -35,6 +35,22 @@ export default class Video {
       url: this._AppConstants.api + '/admin/videos/' + video.id,
       method: 'DELETE'
     }).then((res) => res.data);
+  }
+
+  new(){
+    return this._$http({
+      url:
+      this._AppConstants.api + '/admin/videos/new',
+      method: "GET"
+    }).then((res) => res.data)
+  }
+
+  edit(video){
+    return this._$http({
+      url:
+      this._AppConstants.api + '/admin/videos/' + video.id + '/edit',
+      method: "GET"
+    }).then((res) => res.data)
   }
 
 }

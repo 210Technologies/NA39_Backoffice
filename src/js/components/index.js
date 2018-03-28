@@ -9,5 +9,7 @@ componentsModule.component('listErrors', ListErrors);
 import ShowAuthed from './show-authed.directive';
 componentsModule.directive('showAuthed', ShowAuthed);
 
-export default componentsModule;
+import appNewInstanceModal from './new_instance_modal.component';
+componentsModule.component('appNewInstanceModal', appNewInstanceModal);
 
+export default componentsModule;

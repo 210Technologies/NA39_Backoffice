@@ -11,9 +11,6 @@ stepsModule.config(stepsConfig);
 import stepsCtrl from './steps.controller';
 stepsModule.controller('StepsCtrl', stepsCtrl);
 
-import appNewStepModal from './new_step_modal.component';
-stepsModule.component('appNewStepModal', appNewStepModal);
-
 import appStepModal from './step_modal.component';
 stepsModule.component('appStepModal', appStepModal);
 
