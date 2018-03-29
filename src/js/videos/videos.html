@@ -1,21 +1,21 @@
 <div id="page-content-wrapper">
-  <div id="page-content">            
+  <div id="page-content">
     <div class="container">
 
 
       <div id="page-title">
         <h2>Gallerie vidéo</h2>
-        
+
       </div>
       <div class="panel" ng-show="$ctrl._newCat == false">
           <div class="panel-body" style="text-align:center;">
               <!-- <button class="btn btn-primary">Nouvelle vidéo</button> -->
               <button class="btn btn-blue-alt"  ng-click="$ctrl._newCat = true">Nouvelle catégorie</button>
-             
+
           </div>
       </div>
        <div class="panel" ng-show="$ctrl._newCat == true">
-        
+
               <div class="panel-body">
               <div class="row">
                   <div class="col-xs-10">
@@ -28,7 +28,7 @@
                       <h3 class="title-hero pull-right" style="cursor:pointer;" ng-click="$ctrl._newCat = false">X</h3>
                   </div>
               </div>
-                  
+
                   <form ng-submit="$ctrl.submitCat()" class="form-horizontal bordered-row">
                     <div class="form-group">
                         <label class="col-sm-3 control-label"></label>
@@ -47,9 +47,9 @@
                       Enregistrer
                   </button>
               </div>
-        
+
       </div>
-      
+
 
       <link rel="stylesheet" type="text/css" href="styles/portfolio-navigation.css">
 
@@ -71,7 +71,7 @@
                   <li ng-repeat= "category in $ctrl._category_videos|orderBy:'rank'" ng-class="{'filter active': $ctrl.selected_cat == category, 'filter': $ctrl.selected_cat != category}" ng-click="$ctrl.selected_cat = category">{{category.name}}</li>
               </ul>
           </div>
-      </div> 
+      </div>
 
       <div class="clearfix">
       <div class="panel" ng-show="$ctrl.selected_cat !== undefined && $ctrl.selected_cat.edit != true">
@@ -103,7 +103,7 @@
                       <h3 class="title-hero pull-right" style="cursor:pointer;" ng-click="$ctrl.selected_cat.edit = false">X</h3>
                   </div>
               </div>
-                  
+
                   <form ng-submit="$ctrl.submitCat()" class="form-horizontal bordered-row">
                     <div class="form-group">
                         <label class="col-sm-3 control-label"></label>
@@ -125,7 +125,8 @@
         </div>
       <ul  class="reset-ul row" style="display:flex;flex-direction: row;flex-wrap: wrap;">
         <li ng-repeat="video in $ctrl._videos | filter:{category_video_id:$ctrl.selected_cat.id}" class="col-lg-3 col-sm-6 col-md-4 " style="max-width:250px">
-            <div class="thumbnail-box-wrapper">
+            <div class="thumbnail-box-wrapper" style="position:relative">
+              <i ng-show="video.need_subsription" class="glyph-icon demo-icon icon-linecons-lock" style="position: absolute;top: 0px;z-index: 33;right: 0px;color: orange;border-color: orange;"></i>
                 <div class="thumbnail-box" ng-click="$ctrl.videoModal(video)"   >
                     <a href="javascript:void(0)" title="My Account" class="user-profile clearfix"  aria-expanded="false"></a>
                     <div class="thumb-content">
@@ -151,7 +152,7 @@
                 </div>
             </div>
 
-            
+
         </li>
 
     </ul>
@@ -161,8 +162,7 @@
 
                         </div>
 
-                    
+
 
                 </div>
             </div>
-

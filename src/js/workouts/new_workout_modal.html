@@ -9,7 +9,7 @@
     <div class="row" ng-show="$ctrl._load == true">
         <div class="remove-border glyph-icon demo-icon tooltip-button icon-spin-6 icon-spin" style= "margin: 10px auto;color:#39d2b4"></div>
     </div>
-    
+
     <form class="form-horizontal bordered-row" ng-show="$ctrl._load != true">
         <div class="form-group">
             <div class="col-sm-8 col-sm-offset-2">
@@ -58,9 +58,20 @@
                 </label>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Abonnés uniquement</label>
+            <div class="col-sm-10">
+                <label class="radio-inline">
+                    <input type="checkbox" ng-model="$ctrl._new_workout.need_subsription">
+                    <div class="hint" style="color: #949494;font-size: 10px;">
+                      En décochant cette case vous acceptez que les utilisateurs non-abonnés puisse visionner ce contenue.
+                    </div>
+                </label>
+            </div>
+        </div>
     </form>
 </div>
-    
+
 <div class="modal-footer" ng-show="$ctrl._load != true">
     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.modalInstance.close('cancel')">
         <div class=" icon-typicons-cancel-outline"> </div>
@@ -71,4 +82,3 @@
         Enregistrer
     </button>
 </div>
-

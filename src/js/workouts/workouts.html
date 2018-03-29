@@ -1,24 +1,25 @@
 <div id="page-content-wrapper">
-  <div id="page-content">            
+  <div id="page-content">
     <div class="container">
 
 
       <div id="page-title">
         <h2>Workouts</h2>
-        
+
       </div>
 
       <div class="panel" ng-show="$ctrl._newCat == false">
           <div class="panel-body" style="text-align:center;">
               <!-- <button class="btn btn-primary">Nouvelle vidéo</button> -->
               <button class="btn btn-blue-alt"  ng-click="$ctrl.newWorkoutModal()">New workout</button>
-             
+
           </div>
       </div>
-    
+
       <div class="row" style="display:flex;flex-direction: row;flex-wrap: wrap;">
         <div class="col-md-4 col-lg-3" ng-repeat="workout in $ctrl._workouts" style="max-width: 250px;" >
-          <div class="thumbnail-box-wrapper">
+          <div class="thumbnail-box-wrapper" style="position:relative">
+            <i ng-show="workout.need_subsription" class="glyph-icon demo-icon icon-linecons-lock" style="position: absolute;top: 0px;z-index: 33;right: 0px;color: orange;border-color: orange;"></i>
             <div class="thumbnail-box" >
               <a class="thumb-link" ui-sref="app.workout({id: workout.id})" title="" ></a>
               <div class="thumb-content">
@@ -47,4 +48,3 @@
     </div>
   </div>
 </div>
-
