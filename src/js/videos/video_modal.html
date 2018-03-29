@@ -100,7 +100,7 @@
                               <div class=" icon-typicons-block"> </div>
                               Stop
                           </button>
-                          <button ng-click="item.remove()" class="btn btn-danger" title="Supprimer" ng-disabled= "!$ctrl._uploadInProgress">
+                          <button ng-click="item.remove();$ctrl._uploadInProgress = false" class="btn btn-danger" title="Supprimer" ng-disabled= "!$ctrl._uploadInProgress">
                               <div class=" icon-typicons-cancel"> </div>
                               Cancel
                           </button>
