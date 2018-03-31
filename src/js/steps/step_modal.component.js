@@ -50,7 +50,7 @@ class StepModalCtrl {
     }
     item.onSuccess = function(response, status, headers){
       var key = $($.parseXML(response)).find('Key').text()
-      ctrl._Step.update({id: ctrl._step.id, src: ctrl._s3_url.url.replace('https:','')+ '/' + key}).then(function(res){
+      ctrl._Step.update({id: ctrl._step.id, src: ctrl._s3_url.url+ '/' + key}).then(function(res){
         ctrl._step.src = res.src;
         ctrl._uploadInProgress = false
         item.remove();

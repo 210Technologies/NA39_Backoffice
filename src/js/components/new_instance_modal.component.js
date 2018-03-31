@@ -23,7 +23,14 @@ class NewInstanceModalCtrl {
     if (this.step == 4){return}
     this.step += 1
   }
+  back(){
+    this.step -= 1
+    $('.tab-pane').hide()
+    $('#step-' + (this.step)).show()
+    $('li').removeClass('active')
+    $('li#link-' + (this.step)).addClass('active')
 
+  }
   firstStep(form){
     form.$submitted = true
     if (form.$invalid){return}
@@ -96,7 +103,7 @@ class NewInstanceModalCtrl {
 
     item.onComplete = function(response, video){
       var key = $($.parseXML(response)).find('Key').text()
-      ctrl._Service.update({id: ctrl._new_instance.id, src: ctrl._s3_url.url.replace('https:','')+ '/' + key}).then(function(res){
+      ctrl._Service.update({id: ctrl._new_instance.id, src: ctrl._s3_url.url + '/' + key}).then(function(res){
         ctrl._new_instance = res;
         $('.tab-pane').hide()
         $('#step-' + (ctrl.step + 1)).show()

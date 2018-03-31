@@ -22,7 +22,7 @@ export default class Video {
     }).then((res) => res.data);
   }
 
-  newVideo(video){
+  save(video){
     return this._$http({
       url: this._AppConstants.api + '/admin/videos/',
       method: 'POST',

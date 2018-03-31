@@ -55,7 +55,7 @@ class VideosCtrl {
   }
 
   newVideoModal(category){
-    let ctrl = this._videos
+    let ctrl = this
     this._Video.new().then(
       (res) => {
         var modalInstance = this._$uibModal.open({
@@ -68,14 +68,14 @@ class VideosCtrl {
                     return res;
                   },
                   service: function(){
-                    return ctrl._Step;
+                    return ctrl._Video;
                   },
                   item_name: function(){
-                    return 'step';
+                    return 'video';
                   }
               }
           }).result.then(function (result) {
-            ctrl.push(result)
+            ctrl._videos.push(result)
           });
       }
     )

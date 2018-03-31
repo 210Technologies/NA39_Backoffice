@@ -25,7 +25,7 @@ var env = process.env.NODE_ENV || 'local'
 // Where our files are located
 var jsFiles   = "src/js/**/*.js";
 var viewFiles = "src/js/**/*.html";
-
+var cssFiles = "src/assets/css/*.css"
 var interceptErrors = function(error) {
   var args = Array.prototype.slice.call(arguments);
 
@@ -72,7 +72,7 @@ gulp.task('configuration', function(){
       .pipe(gulp.dest('./src/js/config'));
 })
 gulp.task('browserify', ['views'], function() {
-  
+
   return browserify('./src/js/app.js')
       .transform(babelify, {presets: ["es2015"]})
       .transform(ngAnnotate)
@@ -104,16 +104,16 @@ gulp.task('views', function() {
 
 // This task is used for building production ready
 // minified JS/CSS files into the dist/ folder
-gulp.task('build', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fonts'], function() {
-  var html = gulp.src("build/index.html")
-                 .pipe(gulp.dest('./dist/'));
-
-  var js = gulp.src("build/main.js")
-               .pipe(uglify())
-               .pipe(gulp.dest('./dist/'));
-
-  return merge(html,js);
-});
+// gulp.task('build', ['html', 'browserify', 'minify-css', 'image', 'scripts', 'fonts'], function() {
+//   var html = gulp.src("build/index.html")
+//                  .pipe(gulp.dest('./dist/'));
+//
+//   var js = gulp.src("build/main.js")
+//                .pipe(uglify())
+//                .pipe(gulp.dest('./dist/'));
+//
+//   return merge(html,js);
+// });
 
 gulp.task('default', ['html', 'browserify','configuration', 'minify-css', 'image', 'scripts', 'fonts'], function() {
     if (env == 'local'){
@@ -125,10 +125,11 @@ gulp.task('default', ['html', 'browserify','configuration', 'minify-css', 'image
         port: 4001
       }
     });
-    
+
     gulp.watch("src/index.html", ['html']);
     gulp.watch(viewFiles, ['views']);
     gulp.watch(jsFiles, ['browserify']);
+    gulp.watch(cssFiles, ['minify-css']);
   }
 });
 

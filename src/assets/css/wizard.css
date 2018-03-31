@@ -23,19 +23,23 @@
     position: absolute;
     z-index: 4;
     top: 20px;
-    left: 0;
+    left: 50%;
     width: 100%;
     height: 4px;
     content: '';
     background: #ccc;
 }
-.form-wizard > ul > li:first-child a:before {
-    left: 50%;
+
+.form-wizard > ul > li a.done:before, .form-wizard > ul > li a.done .wizard-step{
+  background: #00bca4;
+
 }
 .form-wizard > ul > li:last-child a:before {
-    right: 50%;
-    left: auto;
-    width: 50%;
+    width: 0%;
+}
+.form-wizard > ul > li.active a .wizard-step{
+  background: #ccc;
+  border: 1px solid #00bca4;
 }
 .form-wizard > ul > li a .wizard-step {
     font-size: 16px;

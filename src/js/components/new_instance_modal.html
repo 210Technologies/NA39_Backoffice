@@ -6,40 +6,52 @@
     <div id="form-wizard-3" class="form-wizard" >
         <ul>
             <li id="link-1" class="active">
-                <a href="#step-1" data-toggle="tab" aria-expanded="true">
-                    <label class="wizard-step">1</label>
-                  <span class="wizard-description">
-                     Informations
-                     <small></small>
-                  </span>
-                </a>
+              <a data-toggle="tab" ng-class="{'done': $ctrl.step > 1}">
+                <label class="wizard-step" ng-show="$ctrl.step <= 1">1</label>
+                <label class="wizard-step" ng-show="$ctrl.step > 1">
+                  <i class="glyph-icon icon-check"></i>
+                </label>
+                <span class="wizard-description">
+                   Informations
+                   <small></small>
+                </span>
+              </a>
             </li>
             <li id="link-2" class="">
-                <a href="#step-2" data-toggle="tab">
-                    <label class="wizard-step">2</label>
-              <span class="wizard-description">
-                 Video
-                 <small>Join the video</small>
-              </span>
-                </a>
+              <a data-toggle="tab" ng-class="{'done': $ctrl.step > 2}">
+                <label class="wizard-step" ng-show="$ctrl.step <= 2">2</label>
+                <label class="wizard-step" ng-show="$ctrl.step > 2">
+                  <i class="glyph-icon icon-check"></i>
+                </label>
+                <span class="wizard-description">
+                  Video
+                  <small>Join the video</small>
+                </span>
+              </a>
             </li>
             <li id="link-3" class="">
-                <a href="#step-3" data-toggle="tab">
-                    <label class="wizard-step">3</label>
-              <span class="wizard-description">
-                Cover
-                 <small>Join the cover</small>
-              </span>
-                </a>
+              <a data-toggle="tab" ng-class="{'done': $ctrl.step > 3}">
+                <label class="wizard-step" ng-show="$ctrl.step <= 3">3</label>
+                <label class="wizard-step" ng-show="$ctrl.step > 3">
+                  <i class="glyph-icon icon-check"></i>
+                </label>
+                <span class="wizard-description">
+                  Cover
+                   <small>Join the cover</small>
+                </span>
+              </a>
             </li>
             <li id="link-4">
-                <a href="#step-4" data-toggle="tab">
-                    <label class="wizard-step">4</label>
-              <span class="wizard-description">
-                 Parameters
-                 <small>set publication parameters</small>
-              </span>
-                </a>
+              <a data-toggle="tab" ng-class="{'done': $ctrl.step > 4}">
+                <label class="wizard-step" ng-show="$ctrl.step <= 4">4</label>
+                <label class="wizard-step" ng-show="$ctrl.step > 4">
+                  <i class="glyph-icon icon-check"></i>
+                </label>
+                <span class="wizard-description">
+                   Parameters
+                   <small>set publication parameters</small>
+                </span>
+              </a>
             </li>
         </ul>
         <div class="row" ng-show="$ctrl.load == true">
@@ -166,10 +178,10 @@
 
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.cancelEdit()">
-        <div class=" icon-typicons-cancel-outline"> </div>
-        <!-- <i class="fa fa-edit"></i>  -->
-    </button>
+  <button type="button" class="btn btn-default" ng-show="$ctrl.step >= 2" ng-click="$ctrl.back()">
+      <i class=" glyph-icon icon-arrow-left"> </i>
+      Prev
+  </button>
     <button type="button" class="btn btn-primary" ng-click="$ctrl.firstStep(videoForm)" ng-show="$ctrl.step == 1">
         Next
         <i class="glyph-icon icon-arrow-right"></i>

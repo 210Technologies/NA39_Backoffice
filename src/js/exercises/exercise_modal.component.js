@@ -50,7 +50,7 @@ class ExerciseModalCtrl {
     }
     item.onSuccess = function(response, status, headers){
       var key = $($.parseXML(response)).find('Key').text()
-      ctrl._Exercise.update({id: ctrl._exercise.id, src: ctrl._s3_url.url.replace('https:','')+ '/' + key}).then(function(res){
+      ctrl._Exercise.update({id: ctrl._exercise.id, src: ctrl._s3_url.url+ '/' + key}).then(function(res){
         ctrl._exercise.src = res.src;
         ctrl._uploadInProgress = false
         item.remove();
