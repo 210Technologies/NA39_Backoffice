@@ -25,7 +25,7 @@ class StepsCtrl {
 
          })
         modalInstance.result.then(function (result) {
-          if (result[0] == 'delete'){
+          if (result == 'delete'){
             ctrl._steps.splice(ctrl._steps.indexOf(step), 1)
           }
         });

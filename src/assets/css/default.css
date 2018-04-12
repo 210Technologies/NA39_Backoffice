@@ -2,7 +2,13 @@
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:300);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
+.blog-box{
+  max-height: 150px
+}
+.blog-box a img{
+  max-height: 120px;
+  width: auto;
+}
 .loading-wrapper{
     position: absolute;
     width: 100%;

@@ -1,12 +1,12 @@
 <div id="page-content-wrapper">
-  <div id="page-content">            
+  <div id="page-content">
     <div class="container">
 
 
       <div id="page-title">
         <h2>Étapes de workout</h2>
         <p>Gestion des différentes étapes qui peuvent constituer un workout.</p>
-        
+
       </div>
       <div class="panel" >
             <div class="panel-body" style="text-align:center;">
@@ -19,13 +19,13 @@
       <div class="row">
         <div class="col-md-9">
         <div class="blog-box row" ng-repeat="step in $ctrl._steps">
-            <div class="post-image col-md-4">
-                <a href="" class="prettyphoto" rel="prettyPhoto[pp_gal]" title="Blog post title">
+            <div class="post-image col-xs-2">
+                <a ng-click="$ctrl.stepModal(step)" class="prettyphoto" rel="prettyPhoto[pp_gal]" title="Blog post title">
                     <img class="img-responsive lazy img-rounded" ng-src="{{step.cover.url}}" data-original="../../assets/image-resources/stock-images/img-44.jpg" alt="" style="display: block;">
                 </a>
             </div>
-            <div class="post-content-wrapper col-md-8">
-                <a class="post-title" href="#" title="">
+            <div class="post-content-wrapper col-md-10">
+                <a class="post-title" ng-click="$ctrl.stepModal(step)" title="">
                     <h3>{{step.title}}</h3>
                 </a>
                 <div class="post-content">
@@ -34,10 +34,9 @@
                 <a ng-click="$ctrl.stepModal(step)" class="btn btn-sm btn-default" title="Read more">Edit</a>
             </div>
         </div>
-  
+
     </div>
     </div>
     </div>
   </div>
 </div>
-

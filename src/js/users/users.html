@@ -1,0 +1,57 @@
+<div id="page-content-wrapper">
+  <div id="page-content">
+    <div class="container">
+
+
+      <div id="page-title">
+        <h2>Utilisateurs</h2>
+        <p>Liste des utilisateur de l'application.</p>
+
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-body">
+                <h3 class="title-hero">
+                    <strong>Total :</strong>
+                    {{$ctrl._users.meta.total_count}}
+                </h3>
+                <div class="example-box-wrapper"  style="text-align:center;">
+                  <div class="dataTables_paginate paging_bootstrap" id="datatable-example_paginate">
+                    <ul uib-pagination ng-model="$ctrl._users.meta.current_page" total-items="$ctrl._users.meta.total_count" max-size="5" items-per-page="25" ng-change="$ctrl.getPageUsers()"></ul>
+                  </div>
+                  <table class="table">
+                      <thead>
+                      <tr>
+                          <th>Nom</th>
+                          <th>Pseudo</th>
+                          <th>Email</th>
+                          <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="user in $ctrl._users.users">
+                          <td>{{user.name}}</td>
+                          <td>{{user.username}}</td>
+                          <td>{{user.email}}</td>
+                          <td>
+                            <a ui-sref="app.user({id: user.id})" class="btn btn-primary">
+                              <i class="glyph-icon icon-eye"></i>
+                              Voir
+                            </a>
+                          </td>
+                          <!-- <td><span ng-class="{'bs-label label-success': user.status == 'online', 'bs-label label-danger': user.status == 'offline'}">{{user.status}}</span></td> -->
+                        </tr>
+                      </tbody>
+                  </table>
+                  <div class="dataTables_paginate paging_bootstrap" id="datatable-example_paginate">
+                    <ul uib-pagination ng-model="$ctrl._users.meta.current_page" total-items="$ctrl._users.meta.total_count" max-size="5" items-per-page="25" ng-change="$ctrl.getPageUsers()"></ul>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>

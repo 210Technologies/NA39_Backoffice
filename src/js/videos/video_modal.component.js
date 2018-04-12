@@ -6,6 +6,7 @@ class VideoModalCtrl {
     this.$onInit = function () {
       this._video = this.resolve.video;
       this._s3_url = this.resolve.s3_url;
+      this._category_videos = this.resolve.category_videos;
      };
     this._video_uploader = new FileUploader();
     this._cover_uploader = new FileUploader();

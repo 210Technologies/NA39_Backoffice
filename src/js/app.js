@@ -25,6 +25,7 @@ import './photos';
 import './items';
 import './exercises';
 import './workouts';
+import './users';
 import './steps';
 
 // Create and bootstrap application
@@ -47,6 +48,7 @@ const requires = [
   'app.items',
   'app.exercises',
   'app.workouts',
+  'app.users',
   'app.steps'
 ];
 
@@ -133,6 +135,24 @@ app.directive('checkImage', function($http) {
                   (res) => res,
                   (err) => element.attr('src', 'styles/no-image.jpg')
                 );
+            });
+        }
+    };
+});
+app.directive('checkAvatar', function($http) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            attrs.$observe('ngSrc', function(ngSrc) {
+                if(ngSrc){
+                  $http({ url: ngSrc, type: "HEAD" }).then(
+                    (res) => res,
+                    (err) => element.attr('src', 'styles/default-avatar.jpg')
+                  );
+                }else{
+                  element.attr('src', 'styles/default-avatar.jpg')
+                }
+
             });
         }
     };

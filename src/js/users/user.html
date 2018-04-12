@@ -1,0 +1,106 @@
+<div id="page-content-wrapper">
+  <div id="page-content" style="min-height: 1249px;">
+    <div class="container">
+
+      <!-- Flot charts -->
+
+      <script type="text/javascript" src="js/flot.js"></script>
+      <script type="text/javascript" src="js/flot-resize.js"></script>
+      <script type="text/javascript" src="js/flot-stack.js"></script>
+      <script type="text/javascript" src="js/flot-pie.js"></script>
+      <script type="text/javascript" src="js/flot-tooltip.js"></script>
+      <script type="text/javascript" src="js/flot-demo-1.js"></script>
+
+      <div class="row mailbox-wrapper">
+        <div class="col-md-4">
+          <div class="panel-layout">
+            <div class="panel-box">
+              <div class="panel-content image-box">
+                <div class="ribbon" ng-show="$ctrl._user.subscribe">
+                    <div class="bg-primary">Abonné</div>
+                </div>
+                <div class="ribbon"  ng-show="!$ctrl._user.subscribe">
+                    <div class="bg-primary" style="background: #d32121;">Non abonné</div>
+                </div>
+                <div class="image-content font-white">
+                  <div class="meta-box meta-box-bottom">
+                    <img style="max-width: 120px;max-height: 120px;" ng-src="{{$ctrl._user.profile.avatar.url}}" data-original="{{$ctrl._user.profile.avatar.url}}" check-avatar alt="" class="meta-image img-bordered img-circle">
+                    <h3 class="meta-heading">{{$ctrl._user.name}}</h3>
+                    <h4 class="meta-subheading">({{$ctrl._user.username}})</h4>
+                  </div>
+                </div>
+                <img src="styles/blurred-bg-13.jpg" alt="">
+              </div>
+              <div class="panel-content pad15A bg-white radius-bottom-all-4">
+                <div class="mrg15T mrg15B"></div>
+                <blockquote class="font-gray">
+                    <p>{{$ctrl._user.profile.description}}</p>
+                    <p ng-show="!$ctrl._user.profile.description">...</p>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="example-box-wrapper">
+            <ul class="list-group row list-group-icons">
+              <li class="col-md-3 active">
+                <a href="#tab-example-4" data-toggle="tab" class="list-group-item">
+                    <i class="glyph-icon font-primary icon-area-chart"></i>
+                    Workout
+                </a>
+              </li>
+              <li class="col-md-3">
+                <a href="#tab-example-1" data-toggle="tab" class="list-group-item">
+                    <i class="glyph-icon font-red icon-certificate"></i>
+                    Abonnement
+                </a>
+              </li>
+              <li class="col-md-3">
+                <a href="#tab-example-2" data-toggle="tab" class="list-group-item" ng-click="$ctrl.getVideos()">
+                    <i class="glyph-icon  icon-camera"></i>
+                    Vidéos
+                </a>
+              </li>
+              <li class="col-md-3">
+                <a href="#tab-example-3" data-toggle="tab" class="list-group-item">
+                    <i class="glyph-icon font-blue-alt icon-info-circle"></i>
+                    Informations
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane fade" id="tab-example-1">
+                <div class="center">
+                  Pas d'Abonnement
+                </div>
+              </div>
+              <div class="tab-pane fade" id="tab-example-2">
+                <div class="content-box" ng-repeat="skill in $ctrl._user.skills">
+                  {{skill.id}}
+                  {{skill.description}}
+                </div>
+              </div>
+              <div class="tab-pane fade" id="tab-example-3">
+              </div>
+              <div class="tab-pane pad0A fade active in" id="tab-example-4">
+                <div class="panel">
+                  <div class="panel-body">
+                      <h3 class="title-hero">
+                          Recent sales activity
+                      </h3>
+                      <div class="example-box-wrapper">
+                          <div id="data-example-1" class="mrg20B" style="width: 100%; height: 300px;"></div>
+                          <div id="data-example-3" style="width: 100%; height: 250px;display: none;"></div>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

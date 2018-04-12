@@ -63,9 +63,7 @@
                                     <option value="online">online</option>
                                     <option value="offline">offline</option>
                                 </select></td>
-                                <td>
-                                    <input type="checkbox" ng-model="step_workout.timed_step" ng-disabled="!step_workout.edit">
-                                </td>
+                                <td><input type="checkbox" ng-model="step_workout.timed_step" ng-disabled="!step_workout.edit"></td>
                                 <td ng-show="!step_workout.edit">
                                     <button class="btn btn-default" ng-click="step_workout.edit = true">Edit</button>
                                     <button class="btn btn-danger" ng-click="$ctrl.deleteStepWorkout(step_workout)">Delete</button>
@@ -78,15 +76,15 @@
                         </tr>
                         <tr ng-show="$ctrl._new_step_workout.new">
                             <td><input type="number" name="" style="width: 50px" ng-model="$ctrl._new_step_workout.rank"></td>
-                            <td><select style="width: 200px" ng-model="$ctrl._new_step_workout.step_id">
-                                <option ng-repeat="step in $ctrl._steps" value="{{step.id}}">{{step.title}}</option>
-                            </select></td>
+                            <td><select style="width: 200px" ng-model="$ctrl._new_step_workout.step_id" ng-options="step.id as step.title for step in $ctrl._steps" ng-init="$ctrl._new_step_workout.step_id = $ctrl._new_step_workout.step_id"></select></td>
+                            <td><input type="number" name="" style="width: 50px" ng-model="$ctrl._new_step_workout.duration"></td>
                             <td><input type="number" name="" style="width: 50px" ng-model="$ctrl._new_step_workout.repetition"></td>
                             <td><input type="number" name="" style="width: 50px" ng-model="$ctrl._new_step_workout.break_period"></td>
                             <td><select style="width: 100px" ng-model="$ctrl._new_step_workout.status">
                                 <option value="online">online</option>
                                 <option value="offline">offline</option>
                             </select></td>
+                            <td><input type="checkbox" ng-model="$ctrl._new_step_workout.timed_step"></td>
                             <td><button class="btn btn-default" ng-click="$ctrl._new_step_workout.new = false">Cancel</button><button class="btn btn-success" ng-click="$ctrl.saveStepWorkout()">Save</button></td>
                         </tr>
                         </tbody>

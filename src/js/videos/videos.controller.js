@@ -25,6 +25,9 @@ class VideosCtrl {
               },
               s3_url: function(){
                 return res;
+              },
+              category_videos: function(){
+                return ctrl._category_videos;
               }
           }
         })
