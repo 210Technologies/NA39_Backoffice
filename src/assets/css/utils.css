@@ -303,6 +303,12 @@
     border-top: 0;
     border-bottom: 4px solid;
 }
+ul.notifications-box li{
+  cursor: pointer;
+}
+ul.notifications-box li:hover{
+  background-color: #F9F9F9;
+}
 .form-wizard > ul,
 .parsley-errors-list,
 .tabs-navigation > ul,

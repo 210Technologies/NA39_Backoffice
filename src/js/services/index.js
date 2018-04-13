@@ -49,4 +49,7 @@ servicesModule.service('Challenge', ChallengeService);
 import QuestionService from './question.service';
 servicesModule.service('Question', QuestionService);
 
+import NotificationService from './notification.service';
+servicesModule.service('Notification', NotificationService);
+
 export default servicesModule;

@@ -9,7 +9,7 @@
       <script type="text/javascript" src="js/flot-stack.js"></script>
       <script type="text/javascript" src="js/flot-pie.js"></script>
       <script type="text/javascript" src="js/flot-tooltip.js"></script>
-      <script type="text/javascript" src="js/flot-demo-1.js"></script>
+      <!-- <script type="text/javascript" src="js/flot-demo-1.js"></script> -->
 
       <div class="row mailbox-wrapper">
         <div class="col-md-4">
@@ -20,7 +20,7 @@
                     <div class="bg-primary">Abonné</div>
                 </div>
                 <div class="ribbon"  ng-show="!$ctrl._user.subscribe">
-                    <div class="bg-primary" style="background: #d32121;">Non abonné</div>
+                    <div class="bg-primary" style="background: #d32121;">Pas abonné</div>
                 </div>
                 <div class="image-content font-white">
                   <div class="meta-box meta-box-bottom">
@@ -37,6 +37,10 @@
                     <p>{{$ctrl._user.profile.description}}</p>
                     <p ng-show="!$ctrl._user.profile.description">...</p>
                 </blockquote>
+                <button class="btn btn-danger" ng-click="$ctrl.deleteUser()">
+                  <i class="glyph-icon icon-trash-o"></i>
+                  Supprimer
+                </button>
               </div>
             </div>
           </div>
@@ -44,7 +48,7 @@
         <div class="col-md-8">
           <div class="example-box-wrapper">
             <ul class="list-group row list-group-icons">
-              <li class="col-md-3 active">
+              <li class="col-md-3 " ng-class="{'active': !$ctrl._show_video}">
                 <a href="#tab-example-4" data-toggle="tab" class="list-group-item">
                     <i class="glyph-icon font-primary icon-area-chart"></i>
                     Workout
@@ -56,7 +60,7 @@
                     Abonnement
                 </a>
               </li>
-              <li class="col-md-3">
+              <li class="col-md-3" ng-class="{'active': $ctrl._show_video}">
                 <a href="#tab-example-2" data-toggle="tab" class="list-group-item" ng-click="$ctrl.getVideos()">
                     <i class="glyph-icon  icon-camera"></i>
                     Vidéos
@@ -71,28 +75,131 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane fade" id="tab-example-1">
-                <div class="center">
+                <div class="center" ng-show="!$ctrl._user.subscription">
                   Pas d'Abonnement
                 </div>
-              </div>
-              <div class="tab-pane fade" id="tab-example-2">
-                <div class="content-box" ng-repeat="skill in $ctrl._user.skills">
-                  {{skill.id}}
-                  {{skill.description}}
+                <div class="content-box plan-box" ng-show="$ctrl._user.subscription" ng-class="{'plan1': $ctrl._user.subscription.plan.nickname == 'Annual','plan2': $ctrl._user.subscription.plan.nickname == 'Premium'}">
+                  <div class="plan-details">
+                    <div class="plan-nickname">
+                      {{$ctrl._user.subscription.plan.nickname}}
+                    </div>
+                    <div class="plan-status {{$ctrl._user.subscription.status}}">
+                      {{$ctrl._user.subscription.status}}
+                    </div>
+                    <div class="plan-amount">
+                      ${{($ctrl._user.subscription.plan.amount / 100).toFixed(2)}}
+                      <span>/{{$ctrl._user.subscription.plan.interval}}</span>
+                    </div>
+                  </div>
+                  <div class="sub-created-at">
+                    Créé le {{$ctrl._user.subscription.created_at | date: "dd/MM/yyyy"}}
+                  </div>
+                  <div class="plan-period-end">
+                    fin de la période le {{$ctrl._user.subscription.current_period_end | date: "dd/MM/yyyy"}}
+                  </div>
+
                 </div>
               </div>
-              <div class="tab-pane fade" id="tab-example-3">
-              </div>
-              <div class="tab-pane pad0A fade active in" id="tab-example-4">
-                <div class="panel">
-                  <div class="panel-body">
-                      <h3 class="title-hero">
-                          Recent sales activity
-                      </h3>
-                      <div class="example-box-wrapper">
-                          <div id="data-example-1" class="mrg20B" style="width: 100%; height: 300px;"></div>
-                          <div id="data-example-3" style="width: 100%; height: 250px;display: none;"></div>
+              <div class="tab-pane fade" id="tab-example-2" ng-class="{'active in': $ctrl._show_video}">
+                <div class="row">
+                  <div class="center" ng-show="$ctrl._user.skills.length == 0">
+                    Pas de vidéos.
+                  </div>
+                  <div class="col-md-6" ng-repeat="skill in $ctrl._user.skills">
+                    <div class="content-box" >
+                      <video style="width: 100%;height: 277px;" controls>
+                        <source ng-src="{{skill.src.url}}" type="video/mp4">
+                        <source ng-src="{{skill.src.url}}" type="video/quicktime">
+                        Your browser does not support HTML5 video.
+                      </video>
+
+                      <div class="panel-content pad15A bg-white radius-bottom-all-4">
+                        <div class="mrg15T mrg15B"></div>
+                        <blockquote class="font-gray">
+                            <p>{{skill.description}}</p>
+                            <p ng-show="!skill.description">...</p>
+                            <small>
+                              Envoyé le
+                              <cite>{{ skill.created_at | date : "dd/MM/yyyy à HH'h'mm" : 'FR'}}</cite>
+                            </small>
+                        </blockquote>
+
                       </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="tab-pane fade" id="tab-example-3">
+                <div class="content-box">
+                    <form class="form-horizontal pad15L pad15R bordered-row">
+                        <div class="form-group remove-border">
+                            <label class="col-sm-3 control-label">Prénom:</label>
+                            <div class="col-sm-6">
+                              {{$ctrl._user.profile.first_name}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nom:</label>
+                            <div class="col-sm-6">
+                                {{$ctrl._user.profile.last_name}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Email:</label>
+                            <div class="col-sm-6">
+                                {{$ctrl._user.email}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Description:</label>
+                            <div class="col-sm-6">
+                                {{$ctrl._user.profile.description}}
+                            </div>
+                        </div>
+                    </form>
+                    <div class="button-pane mrg20T">
+                    </div>
+                </div>
+              </div>
+              <div class="tab-pane pad0A fade " id="tab-example-4" ng-class="{'active in': !$ctrl._show_video}">
+                <div class="center" ng-show="$ctrl._user.user_workouts.length == 0">
+                  Pas de workouts.
+                </div>
+                <div class="panel-group" id="accordion5">
+                  <div class="panel" ng-repeat="user_workout in $ctrl._user.user_workouts">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion5" href="#collapseOne" aria-expanded="false" class="collapsed">
+                                <img ng-src="{{user_workout.workout.cover.url}}" data-original="{{user_workout.workout.cover.url}}" check-image style="width:100px">
+                                <div class="" style="display: inline-block;width: calc(100% - 120px)">
+                                  {{user_workout.workout.title}}
+                                  <div class="pull-right">
+                                    {{user_workout.duration | secondsToDateTime | date: "HH:mm:ss"}}
+                                  </div>
+                                </div>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                          <table class="table">
+                            <tbody>
+                              <tr ng-repeat="step_user_workout in user_workout.step_user_workouts">
+                                <td colspan="1"><img ng-src="{{step_user_workout.step.cover.url}}" data-original="{{step_user_workout.step.cover.url}}" check-image style="width:80px"></td>
+                                <td colspan="4">{{step_user_workout.step.title}}</td>
+                                <td colspan="1">
+                                  <div class="pull-right">
+                                    {{step_user_workout.duration | secondsToDateTime | date: "HH:mm:ss"}}
+                                  </div>
+                                </td>
+                                <!-- <td><span ng-class="{'bs-label label-success': user.status == 'online', 'bs-label label-danger': user.status == 'offline'}">{{user.status}}</span></td> -->
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
                   </div>
                 </div>
 

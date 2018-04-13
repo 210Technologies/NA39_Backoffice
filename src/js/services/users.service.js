@@ -47,6 +47,12 @@ export default class Users {
       method: 'GET'
     }).then((res) => res.data);
   }
+  getWorkouts(id){
+    return this._$http({
+      url: this._AppConstants.api + '/admin/users/' + id + '/workouts',
+      method: 'GET'
+    }).then((res) => res.data);
+  }
 
 
 }

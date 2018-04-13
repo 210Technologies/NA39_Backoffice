@@ -2,6 +2,62 @@
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:300);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.content-box.plan-box{
+  height: 200px;
+  position: relative;
+}
+.content-box.plan1{
+  background-image: url('Plan1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.plan-details{
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 30px;
+  color: white;
+}
+.plan-nickname{
+  padding-left: 20px;
+  display: inline-block;
+}
+.plan-status{
+  display: inline-block;
+  position: absolute;
+  right: 20px;
+  top: 0;
+  font-size: 16px;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+.plan-status.active{
+  background-color: #00a792;
+}
+.plan-amount{
+  text-align: center;
+  padding-top: 10px;
+}
+.plan-amount span{
+  font-size: 20px;
+  color: #DAA520;
+}
+
+.sub-created-at{
+  position: absolute;
+  bottom: 10px;
+  font-size: 14px;
+  color: white;
+  left: 20px;
+}
+.plan-period-end{
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 14px;
+  color: white;
+}
 .blog-box{
   max-height: 150px
 }

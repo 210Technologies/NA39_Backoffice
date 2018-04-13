@@ -12,6 +12,10 @@
 .notifications-box li .notification-text {
     float: left;
 }
+.notifications-box li .notification-text p{
+  font-size: 11px;
+  color: #a9a9a9;
+}
 .notifications-box li:last-child {
     border-bottom: 0;
 }

@@ -21,7 +21,7 @@ function UsersConfig($stateProvider) {
     }
   })
   .state('app.user', {
-    url: '/users/:id',
+    url: '/users/:id?show_video',
     controller: 'UserCtrl',
     controllerAs: '$ctrl',
     templateUrl: 'users/user.html',
