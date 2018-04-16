@@ -68,7 +68,7 @@
     <div id="header-nav-right">
       <div class="dropdown" id="notifications-btn">
             <a data-toggle="dropdown" href="#" title="" aria-expanded="true">
-                <span class="small-badge bg-yellow" ng-show="$ctrl._notifications.length > 0"></span>
+                <span class="badge badge-danger" ng-show="$ctrl._notifications.length > 0" style="position: absolute;right: -10px;top: -10px;">{{$ctrl._notifications.length}}</span>
                 <i class="glyph-icon icon-bell"></i>
             </a>
             <div class="dropdown-menu box-md float-right">

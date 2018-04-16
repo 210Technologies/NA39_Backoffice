@@ -6,7 +6,6 @@ class UserCtrl {
     this._$state = $state
     this._$uibModal = $uibModal
     this._show_video = $state.params.show_video
-    console.log($state.params)
     let ctrl = this
     this._User.getWorkouts(this._user.id).then(function(res){
       ctrl._user.user_workouts = res

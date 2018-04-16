@@ -7,9 +7,15 @@ export default class Users {
 
   }
 
-  all(page) {
+  all(page, name) {
+    if (name){
+      var url = this._AppConstants.api + '/admin/users?page=' + page + '&by_name=' + name
+    }else{
+      var url = this._AppConstants.api + '/admin/users?page=' + page 
+    }
+
     return this._$http({
-      url: this._AppConstants.api + '/admin/users?page=' + page,
+      url: url,
       method: 'GET'
     }).then((res) => res.data);
   }

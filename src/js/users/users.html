@@ -17,12 +17,19 @@
                     {{$ctrl._users.meta.total_count}}
                 </h3>
                 <div class="example-box-wrapper"  style="text-align:center;">
+                  <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-2">
+                      <input type="search" class="form-control" placeholder="Chercher par nom..." ng-model="$ctrl.search" ng-keypress="$ctrl.searchByName()">
+                    </div>
+                  </div>
+
                   <div class="dataTables_paginate paging_bootstrap" id="datatable-example_paginate">
-                    <ul uib-pagination ng-model="$ctrl._users.meta.current_page" total-items="$ctrl._users.meta.total_count" max-size="5" items-per-page="25" ng-change="$ctrl.getPageUsers()"></ul>
+                    <ul uib-pagination ng-model="$ctrl._users.meta.current_page" total-items="$ctrl._users.meta.total_count" max-size="5" items-per-page="25" ng-change="$ctrl.getPageUsers()" ng-disabled="$ctrl._load" boundary-links="true"></ul>
                   </div>
                   <table class="table">
                       <thead>
                       <tr>
+                          <th></th>
                           <th>Nom</th>
                           <th>Pseudo</th>
                           <th>Email</th>
@@ -30,7 +37,13 @@
                       </tr>
                       </thead>
                       <tbody>
-                        <tr ng-repeat="user in $ctrl._users.users">
+                        <tr ng-show="$ctrl.load">
+                          <td colspan="5" class="text-center">
+                            <div class="glyph-icon tooltip-button icon-spin-4 icon-spin font-size-35 font-azure"></div>
+                          </td>
+                        </tr>
+                        <tr ng-repeat="user in $ctrl._users.users" ng-show="!$ctrl.load">
+                          <td><img style="width: 40px;height: 40px;" ng-src="{{user.profile.avatar.url}}" data-original="{{user.profile.avatar.url}}" check-avatar alt="" class="meta-image img-bordered img-circle"></td>
                           <td>{{user.name}}</td>
                           <td>{{user.username}}</td>
                           <td>{{user.email}}</td>
@@ -45,7 +58,7 @@
                       </tbody>
                   </table>
                   <div class="dataTables_paginate paging_bootstrap" id="datatable-example_paginate">
-                    <ul uib-pagination ng-model="$ctrl._users.meta.current_page" total-items="$ctrl._users.meta.total_count" max-size="5" items-per-page="25" ng-change="$ctrl.getPageUsers()"></ul>
+                    <ul uib-pagination ng-model="$ctrl._users.meta.current_page" total-items="$ctrl._users.meta.total_count" max-size="5" items-per-page="25" ng-change="$ctrl.getPageUsers()" ng-disabled="$ctrl._load" boundary-links="true"></ul>
                   </div>
                 </div>
             </div>
