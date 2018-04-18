@@ -42,6 +42,8 @@
     "moment-es6": "^1.0.0",
     "morgan": "^1.8.1",
     "run-sequence": "^1.2.2",
+    "videojs-panorama": "^0.1.7",
+    "videojs-vr": "^1.2.0",
     "vinyl-source-stream": "^1.1.0"
   }
 }

@@ -1,3 +1,5 @@
+// import videojs from 'videojs'
+require('videojs-vr');
 class VideoModalCtrl {
   constructor( Video, FileUploader, AppConstants, $sce) {
     'ngInject';
@@ -14,6 +16,7 @@ class VideoModalCtrl {
     this._showEdit = false
     this._uploadInProgress = false
     this._load_save = false
+
   }
 
   uploadVideo(item) {
