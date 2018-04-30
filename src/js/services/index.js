@@ -52,4 +52,7 @@ servicesModule.service('Question', QuestionService);
 import NotificationService from './notification.service';
 servicesModule.service('Notification', NotificationService);
 
+import SkillService from './skill.service';
+servicesModule.service('Skill', SkillService);
+
 export default servicesModule;

@@ -28,6 +28,8 @@ import './exercises';
 import './workouts';
 import './users';
 import './steps';
+import './skills';
+
 
 // Create and bootstrap application
 const requires = [
@@ -50,7 +52,8 @@ const requires = [
   'app.exercises',
   'app.workouts',
   'app.users',
-  'app.steps'
+  'app.steps',
+  'app.skills'
 ];
 
 // Mount on window for testing

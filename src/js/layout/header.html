@@ -77,7 +77,10 @@
                     Notifications
                 </div>
                 <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="scrollable-content scrollable-slim-box" style="overflow: hidden; width: auto; height: 250px;">
-                    <ul class="no-border notifications-box">
+                    <div class="font-gray font-size-18 text-center pad25T" ng-show="$ctrl._notifications.length == 0">
+                      Pas de notifications.
+                    </div>
+                    <ul class="no-border notifications-box" ng-show="$ctrl._notifications.length > 0">
                         <li ng-repeat="notification in $ctrl._notifications" ng-click="$ctrl.redirectNotification(notification)">
                             <span class=" icon-notification glyph-icon " ng-class="{'bg-danger icon-camera': notification.notification_type == 'new_video'}"></span>
                             <span class="notification-text">

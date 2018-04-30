@@ -1,0 +1,113 @@
+<div id="page-content-wrapper">
+  <div id="page-content">
+    <div class="container">
+
+
+      <div id="page-title">
+        <h2>Vidéos</h2>
+        <p>Liste des vidéos envoyées par les utilisateurs.</p>
+
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="title-hero">
+              <strong>Total :</strong>
+              {{$ctrl._skills.meta.total_count}}
+          </h3>
+
+
+          <div class="row">
+            <div class="col-md-2">
+              <ul class="list-group">
+                  <li class="mrg10B active">
+                      <a href="#faq-tab-1" data-toggle="tab" class="list-group-item" ng-click="$ctrl.newVideos()">
+                          Nouvelles vidéos
+                          <i class="glyph-icon icon-angle-right mrg0A"></i>
+                      </a>
+                  </li>
+                  <li class="mrg10B">
+                      <a href="#faq-tab-2" data-toggle="tab" class="list-group-item" ng-click="$ctrl.seenVideos()">
+                          Déjà vue
+                          <i class="glyph-icon font-green icon-angle-right mrg0A"></i>
+                      </a>
+                  </li>
+                  <li class="mrg10B">
+                      <a href="#faq-tab-3" data-toggle="tab" class="list-group-item " ng-click="$ctrl.archivedVideos()">
+                          Archivées
+                          <i class="glyph-icon icon-angle-right mrg0A"></i>
+                      </a>
+                  </li>
+              </ul>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-xs-12 dataTables_paginate paging_bootstrap" id="datatable-example_paginate">
+                  <ul class="float-right" uib-pagination ng-model="$ctrl._skills.meta.current_page" total-items="$ctrl._skills.meta.total_count" max-size="5" items-per-page="25" ng-change="$ctrl.getPageUsers()" ng-disabled="$ctrl._load" boundary-links="true"></ul>
+                </div>
+                <div class="col-md-4" ng-repeat="skill in $ctrl._skills.skills">
+                  <div class="content-box" >
+                    <video style="width: 100%;height: 220px;" controls>
+                      <source ng-src="{{skill.src.url}}" type="video/mp4">
+                      <source ng-src="{{skill.src.url}}" type="video/quicktime">
+                      Your browser does not support HTML5 video.
+                    </video>
+
+                    <div class="panel-content pad15A bg-white radius-bottom-all-4">
+                      <div class="mrg15T mrg15B"></div>
+                      <blockquote class="font-gray">
+                          <p>{{skill.description}}</p>
+                          <p ng-show="!skill.description">...</p>
+                          <small>
+                            Envoyé le
+                            <cite>{{ skill.created_at | date : "dd/MM/yyyy à HH'h'mm" : 'FR'}}</cite>
+                            par
+                            <a ui-sref="app.user({id: skill.user_id})">{{ skill.user_name}}</a >
+                          </small>
+                      </blockquote>
+                      <div class="font-gray-dark text-right">
+                        <button id="btn-group-example" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                          <i class="glyph-icon icon-ellipsis-v font-size-20  "></i>
+                        </button>
+                        <ul class="dropdown-menu float-right" role="menu" aria-labelledby="btn-group-example">
+                            <li><a ng-click="$ctrl.updateStatus(skill, 1)" ng-show="skill.status == 'new_skill'">
+                              <i class="glyph-icon icon-eye"></i>
+                              Marquer comme vu
+                              </a>
+                              <a ng-click="$ctrl.updateStatus(skill, 0)" ng-show="skill.status == 'seen'">
+                                <i class="glyph-icon icon-eye-slash"></i>
+                                Marquer comme non-vu
+                              </a>
+                            </li>
+                            <li><a ng-click="$ctrl.updateStatus(skill, 2)" ng-hide="skill.status == 'archived'">
+                              <i class="glyph-icon icon-archive"></i>
+                              Archiver
+                            </a>
+                            <a ng-click="$ctrl.updateStatus(skill, 1)" ng-show="skill.status == 'archived'">
+                              <i class="glyph-icon icon-archive"></i>
+                              Désarchiver
+                            </a></li>
+                            <li><a ng-click="$ctrl.deleteSkill(skill)">
+                              <i class="glyph-icon icon-trash-o"></i>
+                              Supprimer
+                            </a></li>
+                        </ul>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-xs-12 dataTables_paginate paging_bootstrap" id="datatable-example_paginate">
+                  <ul class="float-right" uib-pagination ng-model="$ctrl._skills.meta.current_page" total-items="$ctrl._skills.meta.total_count" max-size="5" items-per-page="25" ng-change="$ctrl.getPageUsers()" ng-disabled="$ctrl._load" boundary-links="true"></ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
